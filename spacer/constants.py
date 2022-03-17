@@ -1,0 +1,63 @@
+import arcade
+import random
+
+# SCREEN INFORMATION
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
+SCREEN_TITLE = "The Loan Spacer"
+BACKGROUND_IMG = "spacer/assets/images/space.png"
+
+# SHIP
+SHIP_MAX_SPEED = 5
+SHIP_TURN_AMOUNT = 3
+SHIP_THRUST_AMOUNT = 0.25
+SHIP_RADIUS = 15
+SHIP_SCALE = 0.3
+SHIP_GROUP = "player"
+SHIP_IMG = "spacer/assets/images/playerShip3_green.png"
+DEAD_IMG = "spacer/assets/images/spaceman.png"
+# BULLET
+BULLET_RADIUS = 10
+BULLET_SPEED = 10
+BULLET_LIFE = 60
+BULLET_SCALE = 0.6
+PLAYER_BULLET_IMG = "spacer/assets/images/laserGreen11.png"
+ENEMY_BULLET_IMG = "spacer/assets/images/laserRed03.png"
+PLAYER_BULLET = "p_bullet"
+ENEMY_BULLETS = "e_bullet"
+# ENEMY SHIPS
+ENEMY_SPEED = 2
+ENEMY_TURN_AMOUNT = 2
+ENEMY_SHIP_THRUST_AMOUNT = 0.25
+ENEMY_SHIP_RADIUS = 15
+ENEMY_SHIP_SCALE = 0.3
+ENEMY_LIFE = 1
+ENEMY_SHOT_RATE = 50
+ENEMY_DISTANCE = 250
+ENEMY_GROUP = "enemy"
+ENEMY_BLACK_IMG = "spacer/assets/images/enemyBlack1.png"
+FIRST_ENEMY_SPAWN_RATE = 150
+# PARTICLE EFFECTS
+PARTICLE_GRAVITY = 0.05
+PARTICLE_FADE_RATE = 8
+# Range is from 2.5 <--> 5 with 2.5 and 2.5 set.
+PARTICLE_MIN_SPEED = 2.5
+PARTICLE_SPEED_RANGE = 2.5
+PARTICLE_COUNT = 5
+PARTICLE_RADIUS = 2
+PARTICLE_COLORS = [
+    arcade.color.ALIZARIN_CRIMSON,
+    arcade.color.COQUELICOT,
+    arcade.color.LAVA,
+    arcade.color.KU_CRIMSON,
+    arcade.color.DARK_TANGERINE,
+]
+PARTICLE_SPARKLE_CHANCE = 0.02
+EXPLOSION_GROUP = "particles"
+# --- Smoke
+SMOKE_START_SCALE = 0.25
+SMOKE_EXPANSION_RATE = 0.03
+SMOKE_FADE_RATE = 7
+SMOKE_RISE_RATE = 0.5
+SMOKE_CHANCE = 0.25
+SMOKE_GROUP = "smoke"
