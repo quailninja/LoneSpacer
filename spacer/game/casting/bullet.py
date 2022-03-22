@@ -4,10 +4,11 @@ import math
 
 
 class Bullet(Actor):
-
     """
-    The bullet will have the same speed as the ship when being created
-    The life is set to allow the bullet to die after so many frames
+    Bullets
+
+    This class is responsible for all bullets in the game.
+
     """
 
     def __init__(self, angle, ship_x, ship_y, ship_dx, ship_dy, img):
@@ -17,6 +18,7 @@ class Bullet(Actor):
         :parm ship_y: Ships y Location
         :parm ship_dx: Ships speed on x axis
         :parm ship_dy: Ships speed on Y axis
+        :parm img: Image Bullet will use
         parmaters get the ships current angel, location and speed and then match it
         and adds bullet speed.
         """

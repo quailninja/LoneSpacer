@@ -5,6 +5,12 @@ from constants import *
 
 
 class SpawnEnemies(Action):
+    """Spawns enemy ships.
+
+    The responsibility of SpawnEnemies is to check the level and spawn enemies according to the level.
+
+    """
+
     def execute(self, cast):
         """
         Checks to make sure player is with a certain range and randomly shoots based of rate of fire.

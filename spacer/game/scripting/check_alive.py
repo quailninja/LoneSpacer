@@ -4,6 +4,13 @@ from constants import *
 
 
 class CheckAlive(Action):
+    """
+    Checks if an Actor is alive
+
+    The responsibility of CheckAlive is to remove dead objects and return
+    add explosions and smokes if they object is part of a enemy or player group.
+    """
+
     def execute(self, cast):
         """
         Checks actors to see if they're still alive and then removes them, it also starts the explosion.
