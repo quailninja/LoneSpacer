@@ -5,8 +5,14 @@ import random
 
 
 class Explosion(Action):
+    """
+    Control the particles
+
+    The responsibility of Explosion is to move the particles and remove them from
+    once they have a certain my_alpha value.
+    """
+
     def execute(self, cast):
-        """Update the particle"""
         particle_list = cast.get_actors(EXPLOSION_GROUP)
         for particle in particle_list:
             if particle.my_alpha <= PARTICLE_FADE_RATE:
@@ -32,4 +38,3 @@ class Explosion(Action):
                     smoke = Smoke(5)
                     smoke.position = particle.position
                     cast.add_actor(SMOKE_GROUP, smoke)
-                    particle.my_list.append(smoke)

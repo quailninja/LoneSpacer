@@ -12,6 +12,20 @@ class Point:
         self._x = 0
         self._y = 0
 
+    def change_position(self, x, y):
+        self._x = x
+        self._y = y
+
+    def add_xy(self):
+        self._x += 5
+        self._y += 5
+
+    def get_x(self):
+        return self._x
+
+    def get_y(self):
+        return self._y
+
 
 class Velocity:
     """Velocity
@@ -27,3 +41,16 @@ class Velocity:
     def __init__(self):
         self._dx = 0
         self._dy = 0
+
+    def change_velocity(self, dx, dy):
+        self._x = dx
+        self._y = dy
+
+    def change_angle(self):
+        pass
+
+    def get_dx(self):
+        return self._dx
+
+    def get_dy(self):
+        return self._dy

@@ -5,9 +5,13 @@ import math
 
 class Enemy(Actor):
     def __init__(self, player_ship, x, y):
+        """
+        :parm player_ship: This is the player ship, need for enemy tracking
+        :parm x: for point class, this is were enemy will spawn on x axis
+        :parm y: for point class, this is were enemy will spawn on y axis
+        """
         super().__init__(ENEMY_BLACK_IMG)
-        self._center._x = x
-        self._center._y = y
+        self._center.change_position(x, y)
         self._scale = ENEMY_SHIP_SCALE
         self._radius = ENEMY_SHIP_RADIUS
         self._speed = ENEMY_SHIP_THRUST_AMOUNT
@@ -17,12 +21,9 @@ class Enemy(Actor):
 
     def advance(self):
         """
-        This function will move the current sprite towards whatever
-        other sprite is specified as a parameter.
-
-        We use the 'min' function here to get the sprite to line up with
-        the target sprite, and not jump around if the sprite is not off
-        an exact multiple of SPRITE_SPEED.
+        This function will move the current sprite towards the player ship
+        based off the players location.  This will also have the enemy ships angle
+        or point there ship in the direciton of the player.
         """
         start_x = self._center._x
         start_y = self._center._y

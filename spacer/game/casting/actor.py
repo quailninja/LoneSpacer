@@ -4,9 +4,19 @@ from constants import *
 
 
 class Actor(arcade.Sprite):
+    """A base class for most objects in the game.
 
-    """
-    This is the standard for all objects in the game.
+    This will be the class that is inherited from for most objects in the game.add()
+
+    Attributes:
+        _center(class) = The Point class, the actors current position.
+        _velocity(class) = The Velocity class, the actors direction.
+        _alive(boolean) = Wether the Actor is dead or alive.
+        _texture(method) = Set the image on screen to display of Actor
+        _radius = The size of the Actor
+        _angle = The direction the texture is facing
+        _speed = How fast the Actor can move.
+        _scale = Size of the texture
     """
 
     def __init__(self, img):
@@ -15,15 +25,14 @@ class Actor(arcade.Sprite):
         self._alive = True
         self._texture = arcade.load_texture(img)
         self._radius = 0
-        self._direction = 0
         self._angle = 0
         self._speed = 0
-        self._direction = 0
         self._scale = 1
 
     def advance(self):
         """
-        All objects will use this to move on screen
+        All objects will use this to move on screen.  All life checks
+        for objects that can be destroyed should be put in this function.
         """
         self.wrap()
         self._center._x += self._velocity._dx
@@ -52,4 +61,7 @@ class Actor(arcade.Sprite):
             self._center._y -= SCREEN_HEIGHT
 
     def change_texture(self, img):
+        """
+        This will allow the players to change the texture of a given actor.
+        """
         self._texture = arcade.load_texture(img)
