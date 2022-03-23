@@ -5,6 +5,10 @@ from constants import *
 
 
 class EnemyFire(Action):
+    """
+    Causes enemy ships to fire at player
+    """
+
     def execute(self, cast):
         """
         Checks to make sure player is with a certain range and randomly shoots based of rate of fire.

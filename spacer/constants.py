@@ -1,5 +1,4 @@
 import arcade
-import random
 
 # SCREEN INFORMATION
 SCREEN_WIDTH = 1280
@@ -34,6 +33,7 @@ ENEMY_SHIP_SCALE = 0.3
 ENEMY_LIFE = 1
 ENEMY_SHOT_RATE = 50
 ENEMY_DISTANCE = 250
+FLOCK_DISTANCE = 6
 ENEMY_GROUP = "enemy"
 ENEMY_BLACK_IMG = "spacer/assets/images/enemyBlack1.png"
 FIRST_ENEMY_SPAWN_RATE = 150
