@@ -46,12 +46,12 @@ class CheckCollision(Action):
                     and abs(ship1._center._y - ship2._center._y) < distance
                 ):
                     if ship1._center._y < ship2._center._y:
-                        ship1._center._y -= FLOCK_DISTANCE
+                        ship1._center._y -= ship1._swarm_distance
                     elif ship1._center._y > ship2._center._y:
-                        ship1._center._y += FLOCK_DISTANCE
+                        ship1._center._y += ship1._swarm_distance
 
                     if ship1._center._x < ship2._center._x:
-                        ship1._center._x -= FLOCK_DISTANCE
+                        ship1._center._x -= ship1._swarm_distance
 
                     elif ship1._center._x > ship2._center._x:
-                        ship1._center._x += FLOCK_DISTANCE
+                        ship1._center._x += ship1._swarm_distance

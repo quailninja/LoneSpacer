@@ -1,5 +1,4 @@
 import arcade
-from game.screens.game_screen import GameScreen
 
 
 TITLE_LINE_HEIGHT = 70
@@ -15,8 +14,9 @@ class InstructionView(arcade.View):
         none
     """
 
-    def __init__(self):
+    def __init__(self, return_view):
         super().__init__()
+        self.return_view = return_view
 
     def on_show(self):
         """Updates the background and resets user view
@@ -118,5 +118,4 @@ class InstructionView(arcade.View):
             uses arcades on_mouse_press to detect mouse click
             then it changes the screen
         """
-        game = GameScreen(self)
-        self.window.show_view(game)
+        self.window.show_view(self.return_view)
