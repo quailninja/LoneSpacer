@@ -5,6 +5,7 @@ from game.casting.ship import Ship
 from game.casting.score import Score
 from game.casting.level import Level
 from game.casting.bullet import Bullet
+from game.casting.health_bar import HealthBar
 from game.services.keyboard_services import KeyboardService
 from game.scripting.check_alive import CheckAlive
 from game.scripting.enemy_fire import EnemyFire
@@ -12,7 +13,9 @@ from game.scripting.check_collision import CheckCollision
 from game.scripting.explosion import Explosion
 from game.scripting.smoke_effect import SmokeEffect
 from game.scripting.spawn_enemies import SpawnEnemies
+from game.scripting.update_hp import UpdateHP
 from game.scripting.script import Script
+from game.scripting.check_level import CheckLevel
 from game.screens.pause_screen import PauseScreen
 
 
@@ -41,6 +44,7 @@ class GameScreen(arcade.View):
         self._cast.add_actor(SHIP_GROUP, Ship())
         self._cast.add_actor(LEVEL_GROUP, Level())
         self._cast.add_actor(SCORE_GROUP, Score())
+        self._cast.add_actor(HEALTH_GROUP, HealthBar())
         self._keyboard_services = KeyboardService()
         self._game_on = self._cast.get_first_actor(SHIP_GROUP)
         self._held_keys = set()
@@ -50,6 +54,8 @@ class GameScreen(arcade.View):
         self._scripts.add_action("update", CheckCollision())
         self._scripts.add_action("update", Explosion())
         self._scripts.add_action("update", SmokeEffect())
+        self._scripts.add_action("update", CheckLevel())
+        self._scripts.add_action("update", UpdateHP())
         self._scripts.add_action("update", CheckAlive())
 
     def on_show(self):

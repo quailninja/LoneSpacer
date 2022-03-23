@@ -20,18 +20,13 @@ class Particle(arcade.SpriteCircle):
     """Explosion particle"""
 
     def __init__(self, my_list):
-        # Choose a random color
         color = random.choice(PARTICLE_COLORS)
-
         super().__init__(PARTICLE_RADIUS, color)
-
         self.normal_texture = self.texture
-
         speed = random.random() * PARTICLE_SPEED_RANGE + PARTICLE_MIN_SPEED
         direction = random.randrange(360)
         self.change_x = math.sin(math.radians(direction)) * speed
         self.change_y = math.cos(math.radians(direction)) * speed
-
         self.my_alpha = 255
 
     def advance(self):

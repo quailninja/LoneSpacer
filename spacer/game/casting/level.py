@@ -42,6 +42,12 @@ class Level(Actor):
         else:
             return 4
 
+    def level_up(self):
+        self._level += 1
+
+    def get_level(self):
+        return self._level
+
     def draw(self):
         arcade.draw_text(
             f"Level: {self._level}",

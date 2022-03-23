@@ -59,4 +59,5 @@ class PauseScreen(arcade.View):
         self.game_view._cast.get_first_actor(SCORE_GROUP).draw()
         self.game_view._cast.get_first_actor(LEVEL_GROUP).draw()
         self.game_view._cast.get_first_actor(SHIP_GROUP).draw()
+        self.game_view._cast.get_first_actor(HEALTH_GROUP).draw()
         self.manager.draw()

@@ -3,6 +3,7 @@ import arcade.gui
 from game.screens.game_screen import GameScreen
 from game.screens.instruction_screen import InstructionView
 from constants import *
+from game.casting.debri import Debri
 
 
 class StartScreen(arcade.View):
@@ -13,6 +14,10 @@ class StartScreen(arcade.View):
         self.manager.enable()
         self.game_view = GameScreen()
         self.v_box = arcade.gui.UIBoxLayout()
+        self.asteroid_list = []
+        for x in range(7):
+            asteroid = Debri()
+            self.asteroid_list.append(asteroid)
 
         title = arcade.gui.UITextArea(
             text=SCREEN_TITLE,
@@ -56,4 +61,11 @@ class StartScreen(arcade.View):
         arcade.draw_lrwh_rectangle_textured(
             0, 0, self.window.width, self.window.height, self._background_img
         )
+        for asteroid in self.asteroid_list:
+            asteroid.draw()
         self.manager.draw()
+
+    def update(self, delta_time):
+        for asteroid in self.asteroid_list:
+            asteroid.advance()
+            asteroid.spin()

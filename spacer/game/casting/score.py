@@ -6,8 +6,7 @@ class Score(Actor):
     def __init__(self):
         super().__init__()
         self._score = 0
-        self._spawn_rate = FAST_SPAWN_RATE
-        self._center.change_position(275, SCREEN_HEIGHT - HUD_SPACE)
+        self._center.change_position(250, SCREEN_HEIGHT - HUD_SPACE)
         self._font_size = HUD_FONT_SIZE
         self._font = HUD_FONT_NAME
 
@@ -23,6 +22,9 @@ class Score(Actor):
             self._font_size,
             font_name=self._font,
         )
+
+    def get_score(self):
+        return self._score
 
     def advance(self):
         pass
