@@ -23,7 +23,7 @@ import timeit
 
 
 class GameScreen(arcade.View):
-    """Game director
+    """Game Screen
 
     This is the main game screen, it keeps track of:
     -Player keyboard input
@@ -31,9 +31,12 @@ class GameScreen(arcade.View):
     -Removing and creating objects
 
     Attributes:
-        bag (class): player object
-        flying_actors (list): all the rocks and jewels are put into this list
-        score (int): the players score
+        _background_img: Loads background image for game
+        _cast (class): A list of all actors in the game
+        _keyboard_services(class): Tracks keys that are pressed
+        _game_on (class): Players ship, needed to stop bug with keyboard services
+        _held_keys (set): Keeps track of keys that are held
+        _scripts (class): A list of of scripts to run
     """
 
     def __init__(self):
@@ -147,6 +150,13 @@ class GameScreen(arcade.View):
         # self.processing_time = timeit.default_timer() - start_time
 
     def on_key_press(self, key, key_modifiers):
+        """Keeps track of all keys that are pressed
+
+        Args:
+            key (int): What key is being pressed
+            key_modifiers (int): I think this is also an integer.
+            Checks to see if any modifiers like the shift key are being held down.
+        """
         if key == arcade.key.SPACE:
             ship = self._cast.get_first_actor(SHIP_GROUP)
             self._cast.add_actor(
@@ -168,5 +178,11 @@ class GameScreen(arcade.View):
             self._held_keys.add(key)
 
     def on_key_release(self, key, key_modifiers):
+        """Keeps track of all keys that are released
+
+        Args:
+            key (int): What key is being released
+            key_modifiers (int): Other key modifiers like shift key
+        """
         if key in self._held_keys:
             self._held_keys.remove(key)

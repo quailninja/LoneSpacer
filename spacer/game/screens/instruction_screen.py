@@ -11,7 +11,7 @@ class InstructionView(arcade.View):
     """Instruction Screen
     This is the first screen shown to players when the game starts.
     Attributes:
-        none
+        return_view (class): Previous screen
     """
 
     def __init__(self, return_view):

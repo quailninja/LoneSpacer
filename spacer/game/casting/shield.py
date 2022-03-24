@@ -32,10 +32,7 @@ class Shield(Actor):
         self._velocity._dy = 0
 
     def advance(self):
-        """
-        The advance was changed so that the bullet will die after so many frames
-        each from update takes one life from the bullet
-        """
+        """Tracks shield life"""
         super().advance()
 
         if self._life < 1:

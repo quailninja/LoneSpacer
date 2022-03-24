@@ -3,6 +3,15 @@ from game.casting.actor import Actor
 
 
 class HealthBar(Actor):
+    """Healthbar used to track health
+
+    The responsibility of the healthbar class is to keep track of an actors health.
+
+    Attributes:
+        _current_hp (int): The actors current health
+        _max_hp (int): The actors max health
+    """
+
     def __init__(self):
         super().__init__()
         self._score = 0
@@ -13,6 +22,9 @@ class HealthBar(Actor):
         self._max_hp = PLAYER_LIFE
 
     def draw(self):
+        """
+        An instance of draw. Changed from actor class to create health bar.
+        """
         if self._current_hp < self._max_hp:
             arcade.draw_rectangle_filled(
                 self._center._x,
@@ -41,6 +53,9 @@ class HealthBar(Actor):
         )
 
     def update_hp(self, hp):
+        """
+        Used to update healthbar of actor
+        """
         self._current_hp = hp
 
     def advance(self):

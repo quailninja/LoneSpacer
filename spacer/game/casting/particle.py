@@ -17,7 +17,7 @@ class Smoke(arcade.SpriteCircle):
 
 
 class Particle(arcade.SpriteCircle):
-    """Explosion particle"""
+    """Explosion of particles"""
 
     def __init__(self, my_list):
         color = random.choice(PARTICLE_COLORS)

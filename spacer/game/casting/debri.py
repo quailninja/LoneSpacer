@@ -5,6 +5,15 @@ from random import choice, randint
 
 
 class Debri(Actor):
+    """Actors used for title screen
+
+    The responsibility of the debri class is to randomly generate debri for each
+    the title screen.
+
+    Attributes:
+        _spin_type (int): Random integer generated to determine spin amount.
+    """
+
     def __init__(self):
         super().__init__("spacer/assets/images/debri" + str(randint(1, 15)) + ".png")
         self._angle = 0
@@ -20,4 +29,7 @@ class Debri(Actor):
         self._velocity._dy = math.sin(math.radians(self._direction)) * self._speed
 
     def spin(self):
+        """
+        Makes debri objects on title screen rotate
+        """
         self._angle += self._spin_type

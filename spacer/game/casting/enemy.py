@@ -2,13 +2,26 @@ from game.casting.actor import Actor
 from constants import *
 import math
 
-# stat sheet, 0 - speed, 1 - life, 2- distance, 3- rate, 4- swarm_distance, 5 - img
+
 class Enemy(Actor):
+    """Actors used for enemies
+
+    The responsibility of the enemy class is to generate enemies for the player.
+
+    Attributes:
+        _player_ship (class): The players ship used for tracking enemy
+        _range (int): Distance from player needed to fire enemy
+        _shot_rate (int): How fast the enemy can fire enemy
+        _swarm_distance (int): How close enemy ships will get to eachother
+        _points (int): How many points the enemy is worth
+    """
+
     def __init__(self, player_ship, xy, stat):
         """
-        :parm player_ship: This is the player ship, need for enemy tracking
-        :parm x: for point class, this is were enemy will spawn on x axis
-        :parm y: for point class, this is were enemy will spawn on y axis
+        :parm player_ship: This is the player ship, needed for enemy tracking
+        :parm xy: The x and y points for the enemy to spawn
+        :parm stat: A list of stats values for the enemy 0 - speed, 1 - life, 2- distance,
+        3- rate, 4- swarm_distance, 5 - img, 6 - points
         """
         super().__init__(stat[5])
         self._center.change_position(xy[0], xy[1])
