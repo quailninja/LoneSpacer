@@ -13,8 +13,9 @@ def main():
 
     This starts the arcade window and gives the start view
     """
-
-    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, fullscreen=True)
+    WIDTH, HEIGHT = window.get_size()
+    window.set_viewport(0, WIDTH, 0, HEIGHT)
     start_view = StartScreen()
     window.show_view(start_view)
     arcade.run()

@@ -26,18 +26,18 @@ class StartScreen(arcade.View):
         self._background_img = arcade.load_texture(BACKGROUND_IMG)
         self.manager = arcade.gui.UIManager()
         self.manager.enable()
-        self.game_view = GameScreen()
         self.v_box = arcade.gui.UIBoxLayout()
         self.debri_list = []
-        self.title_sound = Sounds()
-        self.title_sound.play_sound("title", True)
+        self.sounds = Sounds()
+        self.sounds.play_sound("title", True)
+        self.game_view = GameScreen(self.sounds)
         for x in range(7):
             debri = Debri()
             self.debri_list.append(debri)
 
         title = arcade.gui.UITextArea(
             text=SCREEN_TITLE,
-            width=700,
+            width=685,
             height=75,
             font_size=TITLE_SIZE,
             font_name=TITLE_FONT,
@@ -69,7 +69,8 @@ class StartScreen(arcade.View):
         Args:
             event (arcade.gui.UIOnClickEvent): tracks mouse
         """
-        self.title_sound.stop_sound("title")
+        self.sounds.stop_sound("title")
+        self.sounds.play_sound("background")
         self.window.show_view(self.game_view)
 
     def on_controls(self, event: arcade.gui.UIOnClickEvent):

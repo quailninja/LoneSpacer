@@ -1,8 +1,13 @@
 import arcade
+import tkinter as tk
 
+root = tk.Tk()
+
+width = root.winfo_screenwidth()
+height = root.winfo_screenheight()
 # SCREEN INFORMATION
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
+SCREEN_WIDTH = width
+SCREEN_HEIGHT = height
 SCREEN_TITLE = "The Loan Spacer"
 TITLE_SIZE = 40
 TITLE_FONT = "Race Guard"

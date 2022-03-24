@@ -36,6 +36,7 @@ class PauseScreen(arcade.View):
             font_size=30,
             font_name=TITLE_FONT,
         )
+        # self.game_view._cast.get_first_actor(SOUND_GROUP).pause()
 
         self.v_box.add(title).with_space_around(bottom=20)
 

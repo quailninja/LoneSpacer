@@ -6,7 +6,6 @@ from game.casting.score import Score
 from game.casting.level import Level
 from game.casting.bullet import Bullet
 from game.casting.health_bar import HealthBar
-from game.casting.sound import Sounds
 from game.services.keyboard_services import KeyboardService
 from game.services.fps import FPS
 from game.scripting.check_alive import CheckAlive
@@ -39,7 +38,7 @@ class GameScreen(arcade.View):
         _scripts (class): A list of of scripts to run
     """
 
-    def __init__(self):
+    def __init__(self, sounds):
         """
         Sets up the initial conditions of the game
 
@@ -51,7 +50,7 @@ class GameScreen(arcade.View):
         self._cast.add_actor(LEVEL_GROUP, Level())
         self._cast.add_actor(SCORE_GROUP, Score())
         self._cast.add_actor(HEALTH_GROUP, HealthBar())
-        self._cast.add_actor(SOUND_GROUP, Sounds())
+        self._cast.add_actor(SOUND_GROUP, sounds)
         self._keyboard_services = KeyboardService()
         self._fps = FPS()
         self._game_on = self._cast.get_first_actor(SHIP_GROUP)
@@ -73,7 +72,6 @@ class GameScreen(arcade.View):
 
         """
         arcade.set_viewport(0, self.window.width, 0, self.window.height)
-        self._cast.get_first_actor(SOUND_GROUP).play_sound("background", True)
 
     def on_draw(self):
         """
@@ -138,6 +136,14 @@ class GameScreen(arcade.View):
             self.window.show_view(pause)
         elif key == arcade.key.P:
             self._fps.turn_on_off()
+        elif key == arcade.key.F:
+            # User hits f. Flip between full and not full screen.
+            self.set_fullscreen(not self.fullscreen)
+
+            # Get the window coordinates. Match viewport to window coordinates
+            # so there is a one-to-one mapping.
+            width, height = self.get_size()
+            self.set_viewport(0, width, 0, height)
         elif self._game_on:
             self._held_keys.add(key)
 

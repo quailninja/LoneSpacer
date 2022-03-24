@@ -125,7 +125,7 @@ class InstructionView(arcade.View):
             then it changes the screen
         """
         if (
-            SCREEN_WIDTH - 5 > _x > SCREEN_WIDTH - 20
-            and SCREEN_HEIGHT - 5 > _y > SCREEN_HEIGHT - 20
+            SCREEN_WIDTH - 5 > _x > SCREEN_WIDTH - 25
+            and SCREEN_HEIGHT - 5 > _y > SCREEN_HEIGHT - 25
         ):
             self.window.show_view(self.return_view)
