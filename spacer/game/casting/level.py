@@ -13,11 +13,12 @@ class Level(Actor):
         _spawn_rate (int): How fast Enemies spawn
     """
 
-    def __init__(self):
+    def __init__(self, demo):
         super().__init__()
         self._level = 1
         self._spawn_rate = MEDIUM_SPAWN_RATE
         self._center.change_position(20, SCREEN_HEIGHT - HUD_SPACE)
+        self._demo = demo
 
     def level_1_spawn(self):
         """Returns a 1
@@ -88,6 +89,14 @@ class Level(Actor):
             int: Returns _spawn_rate
         """
         return self._spawn_rate
+
+    def get_demo_mode(self):
+        """Returns if game is in demo mode
+
+        Returns:
+            int: Returns _demo
+        """
+        return self._demo
 
     def draw(self):
         """Draws current level as integer unless it's a boss level"""

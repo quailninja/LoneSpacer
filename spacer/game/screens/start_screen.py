@@ -26,18 +26,19 @@ class StartScreen(arcade.View):
         self._background_img = arcade.load_texture(BACKGROUND_IMG)
         self.manager = arcade.gui.UIManager()
         self.manager.enable()
-        self.game_view = GameScreen()
         self.v_box = arcade.gui.UIBoxLayout()
         self.debri_list = []
-        self.title_sound = Sounds()
-        self.title_sound.play_sound("title", True)
+        self.demo = False
+        self.demo_label = ""
+        self.sounds = Sounds()
+        self.sounds.play_sound("title", True)
         for x in range(7):
             debri = Debri()
             self.debri_list.append(debri)
 
         title = arcade.gui.UITextArea(
             text=SCREEN_TITLE,
-            width=700,
+            width=685,
             height=75,
             font_size=TITLE_SIZE,
             font_name=TITLE_FONT,
@@ -46,6 +47,9 @@ class StartScreen(arcade.View):
 
         start_button = arcade.gui.UIFlatButton(text="Start", width=200)
         self.v_box.add(start_button.with_space_around(bottom=20))
+
+        demo_button = arcade.gui.UIFlatButton(text=f"Demo Mode", width=200)
+        self.v_box.add(demo_button.with_space_around(bottom=20))
 
         control_button = arcade.gui.UIFlatButton(text="Controls", width=200)
         self.v_box.add(control_button.with_space_around(bottom=20))
@@ -56,6 +60,7 @@ class StartScreen(arcade.View):
         start_button.on_click = self.on_start
         quit_button.on_click = self.on_quit
         control_button.on_click = self.on_controls
+        demo_button.on_click = self.on_demo
 
         self.manager.add(
             arcade.gui.UIAnchorWidget(
@@ -69,8 +74,10 @@ class StartScreen(arcade.View):
         Args:
             event (arcade.gui.UIOnClickEvent): tracks mouse
         """
-        self.title_sound.stop_sound("title")
-        self.window.show_view(self.game_view)
+        self.sounds.stop_sound("title")
+        self.sounds.play_sound("background", True)
+        game_view = GameScreen(self.sounds, self.demo)
+        self.window.show_view(game_view)
 
     def on_controls(self, event: arcade.gui.UIOnClickEvent):
         """Shows the instruction screen
@@ -88,6 +95,19 @@ class StartScreen(arcade.View):
         """
         arcade.exit()
 
+    def on_demo(self, event: arcade.gui.UIOnClickEvent):
+        """Quits the game, in case the didn't want to play
+
+        Args:
+            event (arcade.gui.UIOnClickEvent): tracks mouse
+        """
+        if self.demo:
+            self.demo = False
+            self.demo_label = ""
+        else:
+            self.demo = True
+            self.demo_label = "Demo Mode On"
+
     def on_draw(self):
         """Draws everything on start screen"""
         self.clear()
@@ -97,6 +117,14 @@ class StartScreen(arcade.View):
         for debri in self.debri_list:
             debri.draw()
         self.manager.draw()
+        arcade.draw_text(
+            self.demo_label,
+            20,
+            SCREEN_HEIGHT - 20,
+            arcade.color.WHITE,
+            font_size=DEFAULT_FONT_SIZE,
+            font_name=HUD_FONT_NAME,
+        )
 
     def update(self, delta_time):
         """Moves all debri on the screen
@@ -107,3 +135,5 @@ class StartScreen(arcade.View):
         for debri in self.debri_list:
             debri.advance()
             debri.spin()
+
+        self.manager

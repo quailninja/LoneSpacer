@@ -2,7 +2,6 @@ from game.scripting.action import Action
 from game.casting.bullet import Bullet
 import random as r
 from constants import *
-from pyglet import media
 
 
 class EnemyFire(Action):
