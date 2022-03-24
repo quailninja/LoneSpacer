@@ -19,11 +19,12 @@ class Actor(arcade.Sprite):
         _scale = Size of the texture
     """
 
-    def __init__(self, img):
+    def __init__(self, img=0):
         self._center = Point()
         self._velocity = Velocity()
         self._alive = True
-        self._texture = arcade.load_texture(img)
+        if img != 0:
+            self._texture = arcade.load_texture(img)
         self._radius = 0
         self._angle = 0
         self._speed = 0
@@ -56,9 +57,9 @@ class Actor(arcade.Sprite):
         if self._center._x > SCREEN_WIDTH:
             self._center._x -= SCREEN_WIDTH
         if self._center._y < 0:
-            self._center._y += SCREEN_HEIGHT
-        if self._center._y > SCREEN_HEIGHT:
-            self._center._y -= SCREEN_HEIGHT
+            self._center._y += SCREEN_HEIGHT - HUD_SPACE
+        if self._center._y > SCREEN_HEIGHT - HUD_SPACE:
+            self._center._y -= SCREEN_HEIGHT - HUD_SPACE
 
     def change_texture(self, img):
         """

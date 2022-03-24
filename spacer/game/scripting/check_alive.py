@@ -41,4 +41,7 @@ class CheckAlive(Action):
                     smoke = Smoke(50)
                     smoke.position = (item._center._x, item._center._y)
                     cast.add_actor(SMOKE_GROUP, smoke)
+                # TODO - Put enemy powerup drops here.
+                if group == ENEMY_GROUP:
+                    cast.get_first_actor(SCORE_GROUP).add_points(item._points)
                 cast.remove_actor(group, item)

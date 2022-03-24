@@ -1,10 +1,11 @@
-from typing import Set
 import arcade
-import random as r
 from constants import *
 from game.casting.cast import Cast
 from game.casting.ship import Ship
+from game.casting.score import Score
+from game.casting.level import Level
 from game.casting.bullet import Bullet
+from game.casting.health_bar import HealthBar
 from game.services.keyboard_services import KeyboardService
 from game.scripting.check_alive import CheckAlive
 from game.scripting.enemy_fire import EnemyFire
@@ -12,7 +13,10 @@ from game.scripting.check_collision import CheckCollision
 from game.scripting.explosion import Explosion
 from game.scripting.smoke_effect import SmokeEffect
 from game.scripting.spawn_enemies import SpawnEnemies
+from game.scripting.update_hp import UpdateHP
 from game.scripting.script import Script
+from game.scripting.check_level import CheckLevel
+from game.screens.pause_screen import PauseScreen
 
 
 class GameScreen(arcade.View):
@@ -29,7 +33,7 @@ class GameScreen(arcade.View):
         score (int): the players score
     """
 
-    def __init__(self, i_view):
+    def __init__(self):
         """
         Sets up the initial conditions of the game
 
@@ -38,6 +42,9 @@ class GameScreen(arcade.View):
         self._background_img = arcade.load_texture(BACKGROUND_IMG)
         self._cast = Cast()
         self._cast.add_actor(SHIP_GROUP, Ship())
+        self._cast.add_actor(LEVEL_GROUP, Level())
+        self._cast.add_actor(SCORE_GROUP, Score())
+        self._cast.add_actor(HEALTH_GROUP, HealthBar())
         self._keyboard_services = KeyboardService()
         self._game_on = self._cast.get_first_actor(SHIP_GROUP)
         self._held_keys = set()
@@ -47,6 +54,8 @@ class GameScreen(arcade.View):
         self._scripts.add_action("update", CheckCollision())
         self._scripts.add_action("update", Explosion())
         self._scripts.add_action("update", SmokeEffect())
+        self._scripts.add_action("update", CheckLevel())
+        self._scripts.add_action("update", UpdateHP())
         self._scripts.add_action("update", CheckAlive())
 
     def on_show(self):
@@ -54,8 +63,6 @@ class GameScreen(arcade.View):
         Used to set the initial screen
 
         """
-
-        arcade.set_background_color(arcade.color.WHITE)
         arcade.set_viewport(0, self.window.width, 0, self.window.height)
 
     def on_draw(self):
@@ -72,29 +79,11 @@ class GameScreen(arcade.View):
         for item in self._cast.get_all_actors():
             item.draw()
 
-    #     self.draw_score()
-
-    # def draw_score(self):
-    #     """
-    #     Puts the current score on the screen
-    #     """
-    #     score_text = "Score: {}".format(self.score)
-    #     start_x = 10
-    #     start_y = self.window.height - 20
-    #     arcade.draw_text(
-    #         score_text,
-    #         start_x=start_x,
-    #         start_y=start_y,
-    #         font_size=12,
-    #         color=arcade.color.NAVY_BLUE,
-    #     )
-
     def update(self, delta_time):
         """
         Update each object in the game.
         :param delta_time: tells us how much time has actually elapsed
         """
-        # pause = PauseView(self, self._i_view)
         for object in self._cast.get_all_actors():
             object.advance()
 
@@ -120,6 +109,9 @@ class GameScreen(arcade.View):
                     PLAYER_BULLET_IMG,
                 ),
             )
+        elif key == arcade.key.ESCAPE:
+            pause = PauseScreen(self)
+            self.window.show_view(pause)
         elif self._game_on:
             self._held_keys.add(key)
 
