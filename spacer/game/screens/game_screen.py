@@ -80,6 +80,7 @@ class GameScreen(arcade.View):
 
         """
         arcade.set_viewport(0, self.window.width, 0, self.window.height)
+        self._cast.get_first_actor(SOUND_GROUP).play_sound("background", True)
 
     def on_draw(self):
         """
