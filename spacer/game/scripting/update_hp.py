@@ -4,12 +4,12 @@ from constants import *
 
 class UpdateHP(Action):
     """
-    Causes enemy ships to fire at player
+    Updates hit poitns for healthbar
     """
 
     def execute(self, cast):
         """
-        Checks to make sure player is with a certain range and randomly shoots based of rate of fire.
+        Checks what actors have healthbars and updates them.
         """
         player = cast.get_actors(SHIP_GROUP)
         health_bar = cast.get_first_actor(HEALTH_GROUP)

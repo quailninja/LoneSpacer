@@ -30,11 +30,9 @@ class Bullet(Actor):
         self._angle = angle
         self._center._x = ship_x
         self._center._y = ship_y
-        self._velocity._dx = (
-            ship_dx + math.cos(math.radians(self._angle + 90)) * self._speed
-        )
-        self._velocity._dy = (
-            ship_dy + math.sin(math.radians(self._angle + 90)) * self._speed
+        self._velocity.change_velocity(
+            ship_dx + math.cos(math.radians(self._angle + 90)) * self._speed,
+            ship_dy + math.sin(math.radians(self._angle + 90)) * self._speed,
         )
 
     def advance(self):

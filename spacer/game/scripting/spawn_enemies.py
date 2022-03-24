@@ -13,7 +13,8 @@ class SpawnEnemies(Action):
 
     def execute(self, cast):
         """
-        Checks to make sure player is with a certain range and randomly shoots based of rate of fire.
+        Spawns enemies, it uses dictionaries to determine spawn location and
+        enemy type.
         """
 
         enemy_list = cast.get_actors(ENEMY_GROUP)
@@ -36,7 +37,11 @@ class SpawnEnemies(Action):
                 len(enemy_list) <= MAXIMUM_ENEMIES
                 and r.randint(0, level._spawn_rate) == 0
             ):
-                if level._level > 3:
+                if level.get_level() > 4:
+                    for enemy in enemy_list:
+                        cast.remove_actor(ENEMY_GROUP, enemy)
+
+                elif level.get_level() > 3:
                     cast.add_actor(
                         ENEMY_GROUP,
                         Enemy(
@@ -45,7 +50,7 @@ class SpawnEnemies(Action):
                             enemy_type[level.level_4_spawn()](),
                         ),
                     )
-                elif level._level > 2:
+                elif level.get_level() > 2:
                     cast.add_actor(
                         ENEMY_GROUP,
                         Enemy(
@@ -54,7 +59,7 @@ class SpawnEnemies(Action):
                             enemy_type[level.level_3_spawn()](),
                         ),
                     )
-                elif level._level > 1:
+                elif level.get_level() > 1:
                     cast.add_actor(
                         ENEMY_GROUP,
                         Enemy(

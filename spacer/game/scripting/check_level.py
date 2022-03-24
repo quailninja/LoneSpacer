@@ -4,12 +4,12 @@ from constants import *
 
 class CheckLevel(Action):
     """
-    Causes enemy ships to fire at player
+    Checks to see if next level has been achieved
     """
 
     def execute(self, cast):
         """
-        Checks to make sure player is with a certain range and randomly shoots based of rate of fire.
+        Updates level based on game condition
         """
         score = cast.get_first_actor(SCORE_GROUP).get_score()
         level = cast.get_first_actor(LEVEL_GROUP)
@@ -18,4 +18,6 @@ class CheckLevel(Action):
         elif score > LEVEL_THREE and level.get_level() < 3:
             level.level_up()
         elif score > LEVEL_FOUR and level.get_level() < 4:
+            level.level_up()
+        elif score > LEVEL_BOSS and level.get_level() < 5:
             level.level_up()

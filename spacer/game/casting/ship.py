@@ -21,9 +21,15 @@ class Ship(Actor):
         self._onecount = True
 
     def turn_right(self):
+        """
+        Turns the ship right
+        """
         self._angle -= SHIP_TURN_AMOUNT
 
     def turn_left(self):
+        """
+        Turns the ship left
+        """
         self._angle += SHIP_TURN_AMOUNT
 
     def engine(self, direction):
@@ -67,4 +73,7 @@ class Ship(Actor):
         self._onecount = False
 
     def get_life(self):
+        """
+        Returns Actors current life
+        """
         return self._life

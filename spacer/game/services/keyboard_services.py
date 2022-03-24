@@ -5,10 +5,6 @@ class KeyboardService(arcade.View):
     """
     Handles the keyboard inputs for the game
 
-    Attributes:
-        _item_move (class): A class that can be moved by the player
-        move_speed (int): how fast the player can move the object
-        width (int): screen width
     """
 
     def __init__(self):
@@ -30,11 +26,5 @@ class KeyboardService(arcade.View):
         if arcade.key.DOWN in keys:
             item.engine("reverse")
 
-        if arcade.key.ESCAPE in keys:
-            self.window.show_view(view1)
-
         elif arcade.key.Q in keys:
             arcade.close_window()
-
-        elif arcade.key.ENTER and view2 != 0:
-            self.window.show_view(view2)

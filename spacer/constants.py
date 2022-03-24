@@ -104,12 +104,18 @@ SCORE_GROUP = "score"
 HUD_FONT_SIZE = 20
 HUD_FONT_NAME = "Space Mission"
 HUD_SPACE = 30
-LEVEL_TWO = 25
-LEVEL_THREE = 75
-LEVEL_FOUR = 300
+LEVEL_TWO = 1
+LEVEL_THREE = 2
+LEVEL_FOUR = 3
+LEVEL_BOSS = 4
 # HEALTHBAR
 HEALTHBAR_WIDTH = 120
 HEALTHBAR_HEIGHT = 25
 HEALTH_GROUP = "health"
 # SOUNDS
 SOUND_GROUP = "sounds"
+PLAYER_LASER = "spacer/assets/sounds/laser.wav"
+ENEMY_LASER = "spacer/assets/sounds/enemy_laser.wav"
+EXPLOSION = "spacer/assets/sounds/explosion.wav"
+BACKGROUND_MUSIC = "spacer/assets/sounds/background_music.mp3"
+TITLE_MUSIC = "spacer/assets/sounds/title_loop.mp3"

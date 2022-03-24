@@ -4,18 +4,35 @@ from game.casting.actor import Actor
 
 
 class Level(Actor):
+    """Keeps track of current level
+
+    The responsibility of the level class is the keep track of what level the player is on.
+
+    Attributes:
+        _level (int): The game level
+        _spawn_rate (int): How fast Enemies spawn
+    """
+
     def __init__(self):
         super().__init__()
         self._level = 1
         self._spawn_rate = MEDIUM_SPAWN_RATE
         self._center.change_position(20, SCREEN_HEIGHT - HUD_SPACE)
-        self._font_size = HUD_FONT_SIZE
-        self._font = HUD_FONT_NAME
 
     def level_1_spawn(self):
+        """Returns a 1
+
+        Returns:
+            int: Returns 1
+        """
         return 1
 
     def level_2_spawn(self):
+        """Level 2 enemy spawns
+
+        Returns:
+            int: Returns a 1 or 2
+        """
         spawn_chance = r.randint(1, 100)
         if spawn_chance < 70:
             return 1
@@ -23,6 +40,11 @@ class Level(Actor):
             return 2
 
     def level_3_spawn(self):
+        """Level 3 enemy spawns
+
+        Returns:
+            int: Returns 1; 2 or 3
+        """
         spawn_chance = r.randint(1, 100)
         if spawn_chance < 60:
             return 1
@@ -32,6 +54,11 @@ class Level(Actor):
             return 3
 
     def level_4_spawn(self):
+        """Level 4 enemy spawns
+
+        Returns:
+            int: Returns 1; 2; 3; or 4
+        """
         spawn_chance = r.randint(1, 100)
         if spawn_chance < 35:
             return 1
@@ -43,20 +70,46 @@ class Level(Actor):
             return 4
 
     def level_up(self):
+        """Increases current level"""
         self._level += 1
 
     def get_level(self):
+        """Returns current level
+
+        Returns:
+            int: Returns _level
+        """
         return self._level
 
+    def get_spawn_rate(self):
+        """Returns spawn rate
+
+        Returns:
+            int: Returns _spawn_rate
+        """
+        return self._spawn_rate
+
     def draw(self):
-        arcade.draw_text(
-            f"Level: {self._level}",
-            self._center._x,
-            self._center._y,
-            arcade.color.WHITE,
-            self._font_size,
-            font_name=self._font,
-        )
+        """Draws current level as integer unless it's a boss level"""
+        if self._level < 5:
+            arcade.draw_text(
+                f"Level: {self._level}",
+                self._center._x,
+                self._center._y,
+                arcade.color.WHITE,
+                self._font_size,
+                font_name=self._font,
+            )
+        else:
+            arcade.draw_text(
+                f"Level: BOSS",
+                self._center._x,
+                self._center._y,
+                arcade.color.WHITE,
+                self._font_size,
+                font_name=self._font,
+            )
 
     def advance(self):
+        """Not used"""
         pass

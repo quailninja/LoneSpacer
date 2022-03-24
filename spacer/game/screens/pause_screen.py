@@ -3,9 +3,25 @@ import arcade.gui
 from constants import *
 from game.screens.instruction_screen import InstructionView
 
-
+# TODO - Figure out how to add restart button
 class PauseScreen(arcade.View):
+    """Pause Screen
+
+    This is the pause screen, it pauses the game:
+
+    Attributes:
+        _background_img: Loads background image for game
+        manager (class): Creates an instance of a UImanager class from arcade
+        game_view (class): Current game state
+        v_box (class): Controls layout of pause menu, instance of UIBoxLayout
+    """
+
     def __init__(self, game_view):
+        """Initiates pause screen
+
+        Args:
+            game_view (game_view): Current state of the game
+        """
         super().__init__()
         self._background_img = arcade.load_texture(BACKGROUND_IMG)
         self.manager = arcade.gui.UIManager()
@@ -43,15 +59,31 @@ class PauseScreen(arcade.View):
         )
 
     def on_resume(self, event: arcade.gui.UIOnClickEvent):
+        """Resumes game
+
+        Args:
+            event (arcade.gui.UIOnClickEvent): Tracks mouse
+        """
         self.window.show_view(self.game_view)
 
     def on_controls(self, event: arcade.gui.UIOnClickEvent):
+        """Shows InstructionView
+
+        Args:
+            event (arcade.gui.UIOnClickEvent): Tracks mouse
+        """
         self.window.show_view(InstructionView(self))
 
     def on_quit(self, event: arcade.gui.UIOnClickEvent):
+        """Quits the game
+
+        Args:
+            event (arcade.gui.UIOnClickEvent): Tracks mouse
+        """
         arcade.exit()
 
     def on_draw(self):
+        """Draws everything on the screen"""
         self.clear()
         arcade.draw_lrwh_rectangle_textured(
             0, 0, self.window.width, self.window.height, self._background_img

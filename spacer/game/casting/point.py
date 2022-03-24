@@ -13,17 +13,29 @@ class Point:
         self._y = 0
 
     def change_position(self, x, y):
+        """Changes position of the point
+
+        Args:
+            x (int): Changes the x position of the point
+            y (int): Changes the y position of the point
+        """
         self._x = x
         self._y = y
 
-    def add_xy(self):
-        self._x += 5
-        self._y += 5
-
     def get_x(self):
+        """Returns the x position of the point
+
+        Returns:
+            int: Returns x
+        """
         return self._x
 
     def get_y(self):
+        """Returns the y position of the point
+
+        Returns:
+            int: Returns y
+        """
         return self._y
 
 
@@ -43,14 +55,27 @@ class Velocity:
         self._dy = 0
 
     def change_velocity(self, dx, dy):
-        self._x = dx
-        self._y = dy
+        """Changes velocity of an object
 
-    def change_angle(self):
-        pass
+        Args:
+            dx (int): changes the x direction
+            dy (int): changes the y direction
+        """
+        self._dx = dx
+        self._dy = dy
 
     def get_dx(self):
+        """Returns x direciton
+
+        Returns:
+            int: Returns dx
+        """
         return self._dx
 
     def get_dy(self):
+        """Returns y direciton
+
+        Returns:
+            int: Returns dy
+        """
         return self._dy
