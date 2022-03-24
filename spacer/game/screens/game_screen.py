@@ -18,6 +18,7 @@ from game.scripting.update_hp import UpdateHP
 from game.scripting.script import Script
 from game.scripting.check_level import CheckLevel
 from game.screens.pause_screen import PauseScreen
+from game.scripting.hud import HUD
 import timeit
 
 
@@ -60,6 +61,7 @@ class GameScreen(arcade.View):
         self._scripts.add_action("update", CheckLevel())
         self._scripts.add_action("update", UpdateHP())
         self._scripts.add_action("update", CheckAlive())
+        self._scripts.add_action("update", HUD())
 
         # # FPS
         # self.processing_time = 0
