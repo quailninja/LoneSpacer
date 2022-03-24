@@ -19,7 +19,7 @@ class Actor(arcade.Sprite):
         _scale = Size of the texture
     """
 
-    def __init__(self, img=0):
+    def __init__(self, img=0, sound=0):
         self._center = Point()
         self._velocity = Velocity()
         self._alive = True
@@ -66,3 +66,9 @@ class Actor(arcade.Sprite):
         This will allow the players to change the texture of a given actor.
         """
         self._texture = arcade.load_texture(img)
+
+    def load_sound(self, file):
+        self._sound = arcade.load_sound(file)
+
+    def play_sound(self):
+        arcade.play_sound(self._sound)
