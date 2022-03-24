@@ -4,6 +4,7 @@ from game.screens.game_screen import GameScreen
 from game.screens.instruction_screen import InstructionView
 from constants import *
 from game.casting.debri import Debri
+from game.casting.sound import Sounds
 
 
 class StartScreen(arcade.View):
@@ -15,6 +16,8 @@ class StartScreen(arcade.View):
         self.game_view = GameScreen()
         self.v_box = arcade.gui.UIBoxLayout()
         self.asteroid_list = []
+        self.title_sound = Sounds()
+        self.title_sound.play_sound("title", True)
         for x in range(7):
             asteroid = Debri()
             self.asteroid_list.append(asteroid)
@@ -48,6 +51,7 @@ class StartScreen(arcade.View):
         )
 
     def on_start(self, event: arcade.gui.UIOnClickEvent):
+        self.title_sound.stop_sound("title")
         self.window.show_view(self.game_view)
 
     def on_controls(self, event: arcade.gui.UIOnClickEvent):
