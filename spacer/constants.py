@@ -34,25 +34,9 @@ ENEMY_SHIP_SCALE = 0.3
 ENEMY_GROUP = "enemy"
 # SHIP IMAGES
 BLACK1_IMG = "spacer/assets/images/enemyBlack1.png"
-BLACK2_IMG = "spacer/assets/images/enemyBlack2.png"
-BLACK3_IMG = "spacer/assets/images/enemyBlack3.png"
-BLACK4_IMG = "spacer/assets/images/enemyBlack4.png"
-BLACK5_IMG = "spacer/assets/images/enemyBlack5.png"
-BLUE1_IMG = "spacer/assets/images/enemyBlue1.png"
 BLUE2_IMG = "spacer/assets/images/enemyBlue2.png"
-BLUE3_IMG = "spacer/assets/images/enemyBlue3.png"
-BLUE4_IMG = "spacer/assets/images/enemyBlue4.png"
-BLUE5_IMG = "spacer/assets/images/enemyBlue5.png"
-GREEN1_IMG = "spacer/assets/images/enemyGreen1.png"
-GREEN2_IMG = "spacer/assets/images/enemyGreen2.png"
 GREEN3_IMG = "spacer/assets/images/enemyGreen3.png"
-GREEN4_IMG = "spacer/assets/images/enemyGreen4.png"
-GREEN5_IMG = "spacer/assets/images/enemyGreen5.png"
-RED1_IMG = "spacer/assets/images/enemyRed1.png"
-RED2_IMG = "spacer/assets/images/enemyRed2.png"
-RED3_IMG = "spacer/assets/images/enemyRed3.png"
 RED4_IMG = "spacer/assets/images/enemyRed4.png"
-RED5_IMG = "spacer/assets/images/enemyRed5.png"
 # SPEED
 SLOW_SPEED = 1
 MEDIUM_SPEED = 2
@@ -127,3 +111,5 @@ LEVEL_FOUR = 300
 HEALTHBAR_WIDTH = 120
 HEALTHBAR_HEIGHT = 25
 HEALTH_GROUP = "health"
+# SOUNDS
+SOUND_GROUP = "sounds"

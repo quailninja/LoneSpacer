@@ -2,6 +2,7 @@ from game.scripting.action import Action
 from game.casting.bullet import Bullet
 import random as r
 from constants import *
+from pyglet import media
 
 
 class EnemyFire(Action):
@@ -15,6 +16,7 @@ class EnemyFire(Action):
         """
         cast_list = cast.get_actors(ENEMY_GROUP)
         player_list = cast.get_actors(SHIP_GROUP)
+        sounds = cast.get_first_actor(SOUND_GROUP)
         in_range = False
         for enemy in cast_list:
             for player in player_list:
@@ -39,3 +41,4 @@ class EnemyFire(Action):
                         ENEMY_BULLET_IMG,
                     ),
                 )
+                sounds.play_sound("enemy_laser")
