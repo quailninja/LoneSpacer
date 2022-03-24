@@ -38,7 +38,7 @@ class GameScreen(arcade.View):
         _scripts (class): A list of of scripts to run
     """
 
-    def __init__(self, sounds):
+    def __init__(self, sounds, demo):
         """
         Sets up the initial conditions of the game
 
@@ -47,7 +47,7 @@ class GameScreen(arcade.View):
         self._background_img = arcade.load_texture(BACKGROUND_IMG)
         self._cast = Cast()
         self._cast.add_actor(SHIP_GROUP, Ship())
-        self._cast.add_actor(LEVEL_GROUP, Level())
+        self._cast.add_actor(LEVEL_GROUP, Level(demo))
         self._cast.add_actor(SCORE_GROUP, Score())
         self._cast.add_actor(HEALTH_GROUP, HealthBar())
         self._cast.add_actor(SOUND_GROUP, sounds)

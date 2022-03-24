@@ -3,6 +3,8 @@ Final project for CSE 210
 
 Spacer is a spacer shooter clone.
 
+Click Demo mode for a shorter version of the game. (Made for grading)
+
 ## Getting Started
 ---
 Make sure you have Python 3.8.0 or newer and Arcade 2.6.10 or newer installed and running on your machine. You can install Arcade by opening a terminal and running the following command.
