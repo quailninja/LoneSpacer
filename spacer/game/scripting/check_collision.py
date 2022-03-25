@@ -38,6 +38,19 @@ class CheckCollision(Action):
                     bullet._alive = False
                     player._life -= 1
 
+        for enemy in enemy_list:
+            for player in player_list:
+                distance = enemy._radius + player._radius
+                if (
+                    abs(enemy._center._x - player._center._x) < distance
+                    and abs(enemy._center._y - player._center._y) < distance
+                ):
+                    if enemy._radius == MISSILE_RADIUS:
+                        enemy._alive = False
+                    else:
+                        enemy._life -= 1
+                    player._life -= 1
+
         for ship1 in enemy_list:
             for ship2 in enemy_list:
                 distance = ship1._radius + ship2._radius

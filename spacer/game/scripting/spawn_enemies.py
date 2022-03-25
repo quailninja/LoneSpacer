@@ -11,6 +11,9 @@ class SpawnEnemies(Action):
 
     """
 
+    def __init__(self):
+        self._spawn_on = True
+
     def execute(self, cast):
         """
         Spawns enemies, it uses dictionaries to determine spawn location and
@@ -32,7 +35,7 @@ class SpawnEnemies(Action):
             3: self.blue_enemy,
             4: self.red_enemy,
         }
-        if len(player_list) > 0:
+        if len(player_list) > 0 and self._spawn_on:
             if (
                 len(enemy_list) <= MAXIMUM_ENEMIES
                 and r.randint(0, level._spawn_rate) == 0
@@ -40,7 +43,17 @@ class SpawnEnemies(Action):
                 if level.get_level() > 4:
                     for enemy in enemy_list:
                         cast.remove_actor(ENEMY_GROUP, enemy)
-
+                    cast.add_actor(
+                        ENEMY_GROUP,
+                        Enemy(
+                            player_list[0],
+                            spawn_location[r.randint(1, 4)](),
+                            self.boss(),
+                        ),
+                    )
+                    cast.get_first_actor(ENEMY_GROUP).boss_update()
+                    level.set_boss()
+                    self._spawn_on = False
                 elif level.get_level() > 3:
                     cast.add_actor(
                         ENEMY_GROUP,
@@ -136,4 +149,15 @@ class SpawnEnemies(Action):
         swarm = CLOSE_SWARM
         img = RED4_IMG
         points = RED_POINTS
+
+        return [speed, life, rate, range, swarm, img, points]
+
+    def boss(self):
+        speed = SLOW_SPEED
+        life = BOSS_HEALTH
+        rate = SLOW_SHOT_RATE
+        range = BOSS_RANGE
+        swarm = CLOSE_SWARM
+        img = BOSS_IMG
+        points = 500
         return [speed, life, rate, range, swarm, img, points]

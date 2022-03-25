@@ -1,5 +1,6 @@
 from game.scripting.action import Action
 from game.casting.bullet import Bullet
+from game.casting.missile import Missile
 import random as r
 from constants import *
 
@@ -32,7 +33,7 @@ class EnemyFire(Action):
                 cast.add_actor(
                     ENEMY_BULLETS,
                     Bullet(
-                        enemy._angle - 180,
+                        enemy._angle - enemy._bullet_angle_correct,
                         enemy._center._x,
                         enemy._center._y,
                         enemy._velocity._dx,
@@ -41,3 +42,20 @@ class EnemyFire(Action):
                     ),
                 )
                 sounds.play_sound("enemy_laser")
+            if (
+                enemy._boss
+                and r.randint(0, FASTEST_SHOT_RATE) == 0
+                and len(player_list) == 1
+            ):
+                cast.add_actor(
+                    ENEMY_GROUP,
+                    Missile(
+                        enemy._angle,
+                        enemy._center._x,
+                        enemy._center._y,
+                        enemy._velocity._dx,
+                        enemy._velocity._dy,
+                        player_list[0],
+                    ),
+                )
+                sounds.play_sound("missile")

@@ -16,7 +16,6 @@ TITLE_LINE_HEIGHT = 100
 DEFAULT_LINE_HEIGHT = 100
 TITLE_FONT_SIZE = 40
 DEFAULT_FONT_SIZE = 18
-
 # SHIP
 SHIP_MAX_SPEED = 5
 SHIP_TURN_AMOUNT = 3
@@ -36,8 +35,16 @@ PLAYER_BULLET_IMG = "spacer/assets/images/laserGreen11.png"
 ENEMY_BULLET_IMG = "spacer/assets/images/laserRed03.png"
 PLAYER_BULLET = "p_bullet"
 ENEMY_BULLETS = "e_bullet"
+# MISSILE
+MISSILE_RADIUS = 11
+MISSILE_SPEED = 7
+MISSILE_LIFE = 1
+MISSILE_SCALE = 0.8
+MISSILE_IMG = "spacer/assets/images/missile.png"
+MISSILE_GROUP = "missile"
 # ----------------------------------ENEMY SHIPS--------------------------------
 ENEMY_SHIP_RADIUS = 15
+BOSS_RADIUS = 40
 ENEMY_SHIP_SCALE = 0.3
 ENEMY_GROUP = "enemy"
 # SHIP IMAGES
@@ -45,6 +52,7 @@ BLACK1_IMG = "spacer/assets/images/enemyBlack1.png"
 BLUE2_IMG = "spacer/assets/images/enemyBlue2.png"
 GREEN3_IMG = "spacer/assets/images/enemyGreen3.png"
 RED4_IMG = "spacer/assets/images/enemyRed4.png"
+BOSS_IMG = "spacer/assets/images/boss.png"
 # SPEED
 SLOW_SPEED = 1
 MEDIUM_SPEED = 2
@@ -53,10 +61,12 @@ FAST_SPEED = 3
 LOW_HEALTH = 1
 MEDIUM_HEALTH = 4
 HIGH_HEALTH = 10
+BOSS_HEALTH = 100
 # RANGE
 CLOSE_RANGE = 125
 MEDIUM_RANGE = 250
 FAR_RANGE = 300
+BOSS_RANGE = 500
 # SWARM DISTANCE
 CLOSE_SWARM = 6
 AVERAGE_SWARM = 15
@@ -67,6 +77,7 @@ SLOW_SHOT_RATE = 300
 AVERAGE_SHOT_RATE = 165
 FAST_SHOT_RATE = 90
 FASTEST_SHOT_RATE = 50
+BOSS_MISSILE_CHANCE = 100
 # SPAWN RATES
 MINIMUM_ENEMIES = 3
 MAXIMUM_ENEMIES = 37
@@ -116,10 +127,10 @@ LEVEL_TWO = 50
 LEVEL_THREE = 125
 LEVEL_FOUR = 200
 LEVEL_BOSS = 300
-DEMO_LEVEL_TWO = 10
-DEMO_LEVEL_THREE = 25
-DEMO_LEVEL_FOUR = 50
-DEMO_LEVEL_BOSS = 75
+DEMO_LEVEL_TWO = 5
+DEMO_LEVEL_THREE = 13
+DEMO_LEVEL_FOUR = 20
+DEMO_LEVEL_BOSS = 30
 # HEALTHBAR
 HEALTHBAR_WIDTH = 120
 HEALTHBAR_HEIGHT = 25
@@ -129,5 +140,6 @@ SOUND_GROUP = "sounds"
 PLAYER_LASER = "spacer/assets/sounds/laser.wav"
 ENEMY_LASER = "spacer/assets/sounds/enemy_laser.wav"
 EXPLOSION = "spacer/assets/sounds/explosion.wav"
+MISSILE = "spacer/assets/sounds/missile.wav"
 BACKGROUND_MUSIC = "spacer/assets/sounds/background_music.mp3"
 TITLE_MUSIC = "spacer/assets/sounds/title_loop.mp3"

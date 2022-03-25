@@ -19,6 +19,9 @@ class Level(Actor):
         self._spawn_rate = MEDIUM_SPAWN_RATE
         self._center.change_position(20, SCREEN_HEIGHT - HUD_SPACE)
         self._demo = demo
+        self._boss = False
+        self._win = False
+        self._lost = False
 
     def level_1_spawn(self):
         """Returns a 1
@@ -82,6 +85,34 @@ class Level(Actor):
         """
         return self._level
 
+    def set_boss(self):
+        """Sets the game as lost"""
+        self._boss = True
+
+    def set_loss(self):
+        """Sets the game as lost"""
+        self._lost = True
+
+    def set_win(self):
+        """Sets the game as lost"""
+        self._win = True
+
+    def check_win(self):
+        """Checks for win
+
+        Returns:
+            bool: Return True or False
+        """
+        return self._win
+
+    def check_lost(self):
+        """Checks for player loss
+
+        Returns:
+            bool: Return True or False
+        """
+        return self._lost
+
     def get_spawn_rate(self):
         """Returns spawn rate
 
@@ -89,6 +120,14 @@ class Level(Actor):
             int: Returns _spawn_rate
         """
         return self._spawn_rate
+
+    def get_boss(self):
+        """Returns _boss status
+
+        Returns:
+            int: Returns True or False
+        """
+        return self._boss
 
     def get_demo_mode(self):
         """Returns if game is in demo mode
