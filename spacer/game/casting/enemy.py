@@ -30,11 +30,14 @@ class Enemy(Actor):
         self._speed = stat[0]
         self._player_ship = player_ship
         self._angle = 45
+        self._bullet_angle_correct = 180
+        self._angle_correct = 90
         self._life = stat[1]
         self._range = stat[2]
         self._shot_rate = stat[3]
         self._swarm_distance = stat[4]
         self._points = stat[6]
+        self._boss = False
 
     def advance(self):
         """
@@ -52,7 +55,8 @@ class Enemy(Actor):
         y_diff = dest_y - start_y
         angle = math.atan2(y_diff, x_diff)
 
-        self._angle = math.degrees(angle) + 90
+        self._angle = math.degrees(angle) + self._angle_correct
+
         if self._center._y < self._player_ship._center._y - (self._range):
             self._center._y += min(
                 self._speed, self._player_ship._center._y - self._center._y
@@ -74,3 +78,10 @@ class Enemy(Actor):
 
         if self._life < 1:
             self._alive = False
+
+    def boss_update(self):
+        self._boss = True
+        self._radius = BOSS_RADIUS
+        self._angle = 0
+        self._angle_correct = -90
+        self._bullet_angle_correct = 0

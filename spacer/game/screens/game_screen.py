@@ -17,7 +17,9 @@ from game.scripting.spawn_enemies import SpawnEnemies
 from game.scripting.update_hp import UpdateHP
 from game.scripting.script import Script
 from game.scripting.check_level import CheckLevel
+from game.scripting.check_win import CheckWin
 from game.screens.pause_screen import PauseScreen
+from game.screens.win_loss_screen import EndView
 from game.scripting.hud import HUD
 
 
@@ -63,6 +65,7 @@ class GameScreen(arcade.View):
         self._scripts.add_action("update", SmokeEffect())
         self._scripts.add_action("update", CheckLevel())
         self._scripts.add_action("update", UpdateHP())
+        self._scripts.add_action("update", CheckWin())
         self._scripts.add_action("update", CheckAlive())
         self._scripts.add_action("update", HUD())
 
@@ -101,6 +104,8 @@ class GameScreen(arcade.View):
 
         self._keyboard_services.check_keys(self._game_on, self._held_keys)
 
+        self.check_win()
+
         for action in self._scripts.get_actions("update"):
             action.execute(self._cast)
 
@@ -136,14 +141,6 @@ class GameScreen(arcade.View):
             self.window.show_view(pause)
         elif key == arcade.key.P:
             self._fps.turn_on_off()
-        elif key == arcade.key.F:
-            # User hits f. Flip between full and not full screen.
-            self.set_fullscreen(not self.fullscreen)
-
-            # Get the window coordinates. Match viewport to window coordinates
-            # so there is a one-to-one mapping.
-            width, height = self.get_size()
-            self.set_viewport(0, width, 0, height)
         elif self._game_on:
             self._held_keys.add(key)
 
@@ -156,3 +153,10 @@ class GameScreen(arcade.View):
         """
         if key in self._held_keys:
             self._held_keys.remove(key)
+
+    def check_win(self):
+        level = self._cast.get_first_actor(LEVEL_GROUP)
+        if level.check_win():
+            self.window.show_view(EndView(True))
+        elif level.check_lost():
+            self.window.show_view(EndView(False))
