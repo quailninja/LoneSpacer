@@ -17,6 +17,7 @@ if full:
 else:
     height = root.winfo_screenheight() - 100
 # SCREEN INFORMATION
+FULLSCREEN = full
 SCREEN_WIDTH = width
 SCREEN_HEIGHT = height
 SCREEN_TITLE = "The Loan Spacer"
