@@ -1,10 +1,21 @@
 import arcade
 import tkinter as tk
+from sys import platform
+
+if platform == "linux" or platform == "linux2":
+    full = False
+elif platform == "darwin":
+    full = False
+elif platform == "win32":
+    full = True
 
 root = tk.Tk()
-
 width = root.winfo_screenwidth()
-height = root.winfo_screenheight()
+
+if full:
+    height = root.winfo_screenheight()
+else:
+    height = root.winfo_screenheight() - 100
 # SCREEN INFORMATION
 SCREEN_WIDTH = width
 SCREEN_HEIGHT = height
