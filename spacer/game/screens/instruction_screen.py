@@ -1,22 +1,17 @@
 import arcade
-from game.screens.game_screen import GameScreen
-
-
-TITLE_LINE_HEIGHT = 70
-DEFAULT_LINE_HEIGHT = 50
-TITLE_FONT_SIZE = 60
-DEFAULT_FONT_SIZE = 20
+from constants import *
 
 
 class InstructionView(arcade.View):
     """Instruction Screen
     This is the first screen shown to players when the game starts.
     Attributes:
-        none
+        return_view (class): Previous screen
     """
 
-    def __init__(self):
+    def __init__(self, return_view):
         super().__init__()
+        self.return_view = return_view
 
     def on_show(self):
         """Updates the background and resets user view
@@ -31,86 +26,97 @@ class InstructionView(arcade.View):
         Args:
             Instructions given to user on screen using arcades draw_text function
         """
-        # arrows = arcade.load_texture("greed/game/images/arrows.png")
-        # red_gem = arcade.load_texture("greed/game/images/red.png")
-        # blue_gem = arcade.load_texture("greed/game/images/blue.png")
-        # yellow_gem = arcade.load_texture("greed/game/images/yellow.png")
-        # rock = arcade.load_texture("greed/game/images/rock.png")
+        x_key = arcade.load_texture("spacer/assets/images/numeralX.png")
+        key_up_down = arcade.load_texture("spacer/assets/images/key_up_down.png")
+        key_right_left = arcade.load_texture("spacer/assets/images/key_right_left.png")
+        key_escape = arcade.load_texture("spacer/assets/images/key_esc.png")
+        spacebar = arcade.load_texture("spacer/assets/images/spacebar.png")
+        key_p = arcade.load_texture("spacer/assets/images/key_p.png")
+        background_img = arcade.load_texture(BACKGROUND_IMG)
+
         self.clear()
+        arcade.draw_lrwh_rectangle_textured(
+            0, 0, self.window.width, self.window.height, background_img
+        )
+        arcade.draw_scaled_texture_rectangle(
+            SCREEN_WIDTH - 15, SCREEN_HEIGHT - 15, x_key, 1.2
+        )
         start_y = self.window.height - 100
         start_x = self.window.width / 2
         arcade.draw_text(
-            "Welcome to Greed!",
+            "Controls",
             start_x,
             start_y,
             arcade.color.WHITE,
             font_size=TITLE_FONT_SIZE,
             anchor_x="center",
+            font_name=TITLE_FONT,
         )
 
         start_y -= TITLE_LINE_HEIGHT
+        arcade.draw_scaled_texture_rectangle(start_x - 80, start_y + 10, spacebar, 0.13)
         arcade.draw_text(
-            "Use the arrow keys to move the bag.",
-            start_x,
-            start_y,
-            arcade.color.WHITE,
-            font_size=DEFAULT_FONT_SIZE,
-            anchor_x="center",
-        )
-        start_y -= DEFAULT_LINE_HEIGHT
-        # arcade.draw_scaled_texture_rectangle(start_x, start_y, arrows, 0.25)
-
-        start_y -= DEFAULT_LINE_HEIGHT + 10
-        arcade.draw_text(
-            "ESC key to pause.",
-            start_x,
-            start_y,
-            arcade.color.WHITE,
-            font_size=DEFAULT_FONT_SIZE,
-            anchor_x="center",
-        )
-
-        start_y -= DEFAULT_LINE_HEIGHT
-        # arcade.draw_scaled_texture_rectangle(start_x - 60, start_y + 10, blue_gem, 1)
-        # arcade.draw_scaled_texture_rectangle(start_x - 10, start_y + 10, yellow_gem, 1)
-        arcade.draw_text(
-            "= 2",
+            "= Fire",
             start_x + 30,
             start_y,
             arcade.color.WHITE,
             font_size=DEFAULT_FONT_SIZE,
             anchor_x="center",
+            font_name=HUD_FONT_NAME,
         )
         start_y -= DEFAULT_LINE_HEIGHT
-        # arcade.draw_scaled_texture_rectangle(start_x - 25, start_y + 10, red_gem, 1)
+        arcade.draw_scaled_texture_rectangle(
+            start_x - 35, start_y + 10, key_up_down, 0.15
+        )
         arcade.draw_text(
-            "= 7",
-            start_x + 30,
+            "= Move the Ship",
+            start_x + 90,
             start_y,
             arcade.color.WHITE,
             font_size=DEFAULT_FONT_SIZE,
             anchor_x="center",
+            font_name=HUD_FONT_NAME,
         )
         start_y -= DEFAULT_LINE_HEIGHT
-        # arcade.draw_scaled_texture_rectangle(start_x - 25, start_y + 10, rock, 1)
+        arcade.draw_scaled_texture_rectangle(
+            start_x - 50, start_y + 10, key_right_left, 0.15
+        )
         arcade.draw_text(
-            "= -10",
-            start_x + 40,
+            "= Turn the Ship",
+            start_x + 90,
             start_y,
             arcade.color.WHITE,
             font_size=DEFAULT_FONT_SIZE,
             anchor_x="center",
+            font_name=HUD_FONT_NAME,
+        )
+        start_y -= DEFAULT_LINE_HEIGHT
+        arcade.draw_scaled_texture_rectangle(
+            start_x - 34, start_y + 10, key_escape, 0.18
+        )
+        arcade.draw_text(
+            "= Pause",
+            start_x + 45,
+            start_y,
+            arcade.color.WHITE,
+            font_size=DEFAULT_FONT_SIZE,
+            anchor_x="center",
+            font_name=HUD_FONT_NAME,
         )
 
         start_y -= DEFAULT_LINE_HEIGHT
+        arcade.draw_scaled_texture_rectangle(start_x - 25, start_y + 10, key_p, 0.18)
         arcade.draw_text(
-            "Click to start the game",
-            start_x,
+            "= Show FPS",
+            start_x + 70,
             start_y,
             arcade.color.WHITE,
-            font_size=DEFAULT_FONT_SIZE / 2,
+            font_size=DEFAULT_FONT_SIZE,
             anchor_x="center",
+            font_name=HUD_FONT_NAME,
         )
+
+        start_y -= DEFAULT_LINE_HEIGHT
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         """Waits to detect mouse click from user
@@ -118,5 +124,8 @@ class InstructionView(arcade.View):
             uses arcades on_mouse_press to detect mouse click
             then it changes the screen
         """
-        game = GameScreen(self)
-        self.window.show_view(game)
+        if (
+            SCREEN_WIDTH - 5 > _x > SCREEN_WIDTH - 25
+            and SCREEN_HEIGHT - 5 > _y > SCREEN_HEIGHT - 25
+        ):
+            self.window.show_view(self.return_view)

@@ -17,13 +17,19 @@ class Ship(Actor):
         self._radius = SHIP_RADIUS
         self._speed = SHIP_THRUST_AMOUNT
         self._shield_active = False
-        self._life = 650000
+        self._life = PLAYER_LIFE
         self._onecount = True
 
     def turn_right(self):
+        """
+        Turns the ship right
+        """
         self._angle -= SHIP_TURN_AMOUNT
 
     def turn_left(self):
+        """
+        Turns the ship left
+        """
         self._angle += SHIP_TURN_AMOUNT
 
     def engine(self, direction):
@@ -65,3 +71,9 @@ class Ship(Actor):
         I'm having trouble with only having one explosion in the game, this is a tempory fix.
         """
         self._onecount = False
+
+    def get_life(self):
+        """
+        Returns Actors current life
+        """
+        return self._life

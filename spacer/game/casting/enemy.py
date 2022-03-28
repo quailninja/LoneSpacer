@@ -4,20 +4,40 @@ import math
 
 
 class Enemy(Actor):
-    def __init__(self, player_ship, x, y):
+    """Actors used for enemies
+
+    The responsibility of the enemy class is to generate enemies for the player.
+
+    Attributes:
+        _player_ship (class): The players ship used for tracking enemy
+        _range (int): Distance from player needed to fire enemy
+        _shot_rate (int): How fast the enemy can fire enemy
+        _swarm_distance (int): How close enemy ships will get to eachother
+        _points (int): How many points the enemy is worth
+    """
+
+    def __init__(self, player_ship, xy, stat):
         """
-        :parm player_ship: This is the player ship, need for enemy tracking
-        :parm x: for point class, this is were enemy will spawn on x axis
-        :parm y: for point class, this is were enemy will spawn on y axis
+        :parm player_ship: This is the player ship, needed for enemy tracking
+        :parm xy: The x and y points for the enemy to spawn
+        :parm stat: A list of stats values for the enemy 0 - speed, 1 - life, 2- distance,
+        3- rate, 4- swarm_distance, 5 - img, 6 - points
         """
-        super().__init__(ENEMY_BLACK_IMG)
-        self._center.change_position(x, y)
+        super().__init__(stat[5])
+        self._center.change_position(xy[0], xy[1])
         self._scale = ENEMY_SHIP_SCALE
         self._radius = ENEMY_SHIP_RADIUS
-        self._speed = ENEMY_SHIP_THRUST_AMOUNT
+        self._speed = stat[0]
         self._player_ship = player_ship
         self._angle = 45
-        self._life = 1
+        self._bullet_angle_correct = 180
+        self._angle_correct = 90
+        self._life = stat[1]
+        self._range = stat[2]
+        self._shot_rate = stat[3]
+        self._swarm_distance = stat[4]
+        self._points = stat[6]
+        self._boss = False
 
     def advance(self):
         """
@@ -35,25 +55,33 @@ class Enemy(Actor):
         y_diff = dest_y - start_y
         angle = math.atan2(y_diff, x_diff)
 
-        self._angle = math.degrees(angle) + 90
-        if self._center._y < self._player_ship._center._y - (ENEMY_DISTANCE):
+        self._angle = math.degrees(angle) + self._angle_correct
+
+        if self._center._y < self._player_ship._center._y - (self._range):
             self._center._y += min(
-                ENEMY_SPEED, self._player_ship._center._y - self._center._y
+                self._speed, self._player_ship._center._y - self._center._y
             )
-        elif self._center._y > self._player_ship._center._y + (ENEMY_DISTANCE):
+        elif self._center._y > self._player_ship._center._y + (self._range):
             self._center._y -= min(
-                ENEMY_SPEED, self._center._y - self._player_ship._center._y
+                self._speed, self._center._y - self._player_ship._center._y
             )
 
-        if self._center._x < self._player_ship._center._x - (ENEMY_DISTANCE):
+        if self._center._x < self._player_ship._center._x - (self._range):
             self._center._x += min(
-                ENEMY_SPEED, self._player_ship._center._x - self._center._x
+                self._speed, self._player_ship._center._x - self._center._x
             )
 
-        elif self._center._x > self._player_ship._center._x + (ENEMY_DISTANCE):
+        elif self._center._x > self._player_ship._center._x + (self._range):
             self._center._x -= min(
-                ENEMY_SPEED, self._center._x - self._player_ship._center._x
+                self._speed, self._center._x - self._player_ship._center._x
             )
 
         if self._life < 1:
             self._alive = False
+
+    def boss_update(self):
+        self._boss = True
+        self._radius = BOSS_RADIUS
+        self._angle = 0
+        self._angle_correct = -90
+        self._bullet_angle_correct = 0

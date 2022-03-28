@@ -16,10 +16,8 @@ class Explosion(Action):
         particle_list = cast.get_actors(EXPLOSION_GROUP)
         for particle in particle_list:
             if particle.my_alpha <= PARTICLE_FADE_RATE:
-                # Faded out, remove
                 cast.remove_actor(EXPLOSION_GROUP, particle)
             else:
-                # Update
                 particle.my_alpha -= PARTICLE_FADE_RATE
                 particle.my_alpha = particle.my_alpha
                 particle.center_x += particle.change_x

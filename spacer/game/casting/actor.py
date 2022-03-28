@@ -13,21 +13,29 @@ class Actor(arcade.Sprite):
         _velocity(class) = The Velocity class, the actors direction.
         _alive(boolean) = Wether the Actor is dead or alive.
         _texture(method) = Set the image on screen to display of Actor
-        _radius = The size of the Actor
-        _angle = The direction the texture is facing
-        _speed = How fast the Actor can move.
-        _scale = Size of the texture
+        _radius(int) = The size of the Actor
+        _angle (int) = The direction the texture is facing
+        _speed (int) = How fast the Actor can move.
+        _scale (int) = Size of the texture
+        _font_size (int) = Font size for text based actors.
+        _font (str) = Type of font for text based actors
     """
 
-    def __init__(self, img):
+    def __init__(self, img=0):
+        """
+        :parm img: Image for bullet, default is 0
+        """
         self._center = Point()
         self._velocity = Velocity()
         self._alive = True
-        self._texture = arcade.load_texture(img)
+        if img != 0:
+            self._texture = arcade.load_texture(img)
         self._radius = 0
         self._angle = 0
         self._speed = 0
         self._scale = 1
+        self._font_size = HUD_FONT_SIZE
+        self._font = HUD_FONT_NAME
 
     def advance(self):
         """
@@ -48,20 +56,25 @@ class Actor(arcade.Sprite):
 
     def wrap(self):
         """
-        This allows objects to appear if they are moving from top to bottom by adding
-        or subtracting the width and the height
+        Moves actor from one side of the screen to the other
         """
         if self._center._x < 0:
             self._center._x += SCREEN_WIDTH
         if self._center._x > SCREEN_WIDTH:
             self._center._x -= SCREEN_WIDTH
         if self._center._y < 0:
-            self._center._y += SCREEN_HEIGHT
-        if self._center._y > SCREEN_HEIGHT:
-            self._center._y -= SCREEN_HEIGHT
+            self._center._y += SCREEN_HEIGHT - HUD_SPACE
+        if self._center._y > SCREEN_HEIGHT - HUD_SPACE:
+            self._center._y -= SCREEN_HEIGHT - HUD_SPACE
 
     def change_texture(self, img):
         """
         This will allow the players to change the texture of a given actor.
         """
         self._texture = arcade.load_texture(img)
+
+    def load_sound(self, file):
+        self._sound = arcade.load_sound(file)
+
+    def play_sound(self):
+        arcade.play_sound(self._sound)
