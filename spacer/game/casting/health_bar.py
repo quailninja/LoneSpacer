@@ -14,10 +14,7 @@ class HealthBar(Actor):
 
     def __init__(self):
         super().__init__()
-        self._score = 0
         self._center.change_position(600, SCREEN_HEIGHT - HUD_FONT_SIZE)
-        self._font_size = HUD_FONT_SIZE
-        self._font = HUD_FONT_NAME
         self._current_hp = 0
         self._max_hp = PLAYER_LIFE
 
@@ -59,4 +56,5 @@ class HealthBar(Actor):
         self._current_hp = hp
 
     def advance(self):
+        """Not Implemented"""
         pass

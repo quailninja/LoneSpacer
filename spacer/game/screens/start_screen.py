@@ -3,10 +3,10 @@ import arcade.gui
 from game.screens.game_screen import GameScreen
 from game.screens.instruction_screen import InstructionView
 from constants import *
-from game.casting.debri import Debri
+from game.casting.debris import Debris
 from game.casting.sound import Sounds
 
-# TODO - Add demo button to make game shorter
+
 class StartScreen(arcade.View):
     """Start Screen
 
@@ -32,9 +32,9 @@ class StartScreen(arcade.View):
         self.demo_label = ""
         self.sounds = Sounds()
         self.sounds.play_sound("title", True)
-        for x in range(7):
-            debri = Debri()
-            self.debri_list.append(debri)
+        for x in range(DEBRIS_AMOUNT):
+            debris = Debris()
+            self.debri_list.append(debris)
 
         title = arcade.gui.UITextArea(
             text=SCREEN_TITLE,

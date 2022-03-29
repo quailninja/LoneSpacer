@@ -2,10 +2,11 @@ import arcade
 from constants import *
 from game.casting.cast import Cast
 from game.casting.ship import Ship
+from game.casting.shield import Shield
 from game.casting.score import Score
 from game.casting.level import Level
-from game.casting.bullet import Bullet
 from game.casting.health_bar import HealthBar
+from game.casting.shield_bar import ShieldBar
 from game.services.keyboard_services import KeyboardService
 from game.services.fps import FPS
 from game.scripting.check_alive import CheckAlive
@@ -14,7 +15,7 @@ from game.scripting.check_collision import CheckCollision
 from game.scripting.explosion import Explosion
 from game.scripting.smoke_effect import SmokeEffect
 from game.scripting.spawn_enemies import SpawnEnemies
-from game.scripting.update_hp import UpdateHP
+from game.scripting.update_hud import UpdateHUD
 from game.scripting.script import Script
 from game.scripting.check_level import CheckLevel
 from game.scripting.check_win import CheckWin
@@ -51,7 +52,8 @@ class GameScreen(arcade.View):
         self._cast.add_actor(SHIP_GROUP, Ship())
         self._cast.add_actor(LEVEL_GROUP, Level(demo))
         self._cast.add_actor(SCORE_GROUP, Score())
-        self._cast.add_actor(HEALTH_GROUP, HealthBar())
+        self._cast.add_actor(HUD_GROUP, HealthBar())
+        self._cast.add_actor(HUD_GROUP, ShieldBar())
         self._cast.add_actor(SOUND_GROUP, sounds)
         self._keyboard_services = KeyboardService()
         self._fps = FPS()
@@ -64,7 +66,7 @@ class GameScreen(arcade.View):
         self._scripts.add_action("update", Explosion())
         self._scripts.add_action("update", SmokeEffect())
         self._scripts.add_action("update", CheckLevel())
-        self._scripts.add_action("update", UpdateHP())
+        self._scripts.add_action("update", UpdateHUD())
         self._scripts.add_action("update", CheckWin())
         self._scripts.add_action("update", CheckAlive())
         self._scripts.add_action("update", HUD())
@@ -123,24 +125,15 @@ class GameScreen(arcade.View):
             Checks to see if any modifiers like the shift key are being held down.
         """
         if key == arcade.key.SPACE:
-            ship = self._cast.get_first_actor(SHIP_GROUP)
-            self._cast.add_actor(
-                PLAYER_BULLET,
-                Bullet(
-                    ship._angle,
-                    ship._center._x,
-                    ship._center._y,
-                    ship._velocity._dx,
-                    ship._velocity._dy,
-                    PLAYER_BULLET_IMG,
-                ),
-            )
+            self._keyboard_services.fire(self._cast)
             self._cast.get_first_actor(SOUND_GROUP).play_sound("player_laser")
         elif key == arcade.key.ESCAPE:
             pause = PauseScreen(self)
             self.window.show_view(pause)
         elif key == arcade.key.P:
             self._fps.turn_on_off()
+        elif key == arcade.key.S:
+            self._keyboard_services.shield_up(self._cast)
         elif self._game_on:
             self._held_keys.add(key)
 
@@ -155,6 +148,7 @@ class GameScreen(arcade.View):
             self._held_keys.remove(key)
 
     def check_win(self):
+        """Checks if current game has met game ending conditions"""
         level = self._cast.get_first_actor(LEVEL_GROUP)
         if level.check_win():
             self.window.show_view(EndView(True))

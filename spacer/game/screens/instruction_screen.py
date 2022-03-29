@@ -32,6 +32,7 @@ class InstructionView(arcade.View):
         key_escape = arcade.load_texture("spacer/assets/images/key_esc.png")
         spacebar = arcade.load_texture("spacer/assets/images/spacebar.png")
         key_p = arcade.load_texture("spacer/assets/images/key_p.png")
+        key_s = arcade.load_texture("spacer/assets/images/key_s.png")
         background_img = arcade.load_texture(BACKGROUND_IMG)
 
         self.clear()
@@ -105,10 +106,23 @@ class InstructionView(arcade.View):
         )
 
         start_y -= DEFAULT_LINE_HEIGHT
-        arcade.draw_scaled_texture_rectangle(start_x - 25, start_y + 10, key_p, 0.18)
+        arcade.draw_scaled_texture_rectangle(start_x - 34, start_y + 10, key_p, 0.18)
         arcade.draw_text(
             "= Show FPS",
-            start_x + 70,
+            start_x + 50,
+            start_y,
+            arcade.color.WHITE,
+            font_size=DEFAULT_FONT_SIZE,
+            anchor_x="center",
+            font_name=HUD_FONT_NAME,
+        )
+
+        start_y -= DEFAULT_LINE_HEIGHT
+
+        arcade.draw_scaled_texture_rectangle(start_x - 34, start_y + 10, key_s, 0.18)
+        arcade.draw_text(
+            "= Shield",
+            start_x + 45,
             start_y,
             arcade.color.WHITE,
             font_size=DEFAULT_FONT_SIZE,
@@ -128,4 +142,15 @@ class InstructionView(arcade.View):
             SCREEN_WIDTH - 5 > _x > SCREEN_WIDTH - 25
             and SCREEN_HEIGHT - 5 > _y > SCREEN_HEIGHT - 25
         ):
+            self.window.show_view(self.return_view)
+
+    def on_key_press(self, key, key_modifiers):
+        """Keeps track of all keys that are pressed
+
+        Args:
+            key (int): What key is being pressed
+            key_modifiers (int): I think this is also an integer.
+            Checks to see if any modifiers like the shift key are being held down.
+        """
+        if key == arcade.key.ESCAPE:
             self.window.show_view(self.return_view)

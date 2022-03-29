@@ -10,7 +10,7 @@ class Shield(Actor):
 
     """
 
-    def __init__(self, ship_x, ship_y, ship_dx, ship_dy, img):
+    def __init__(self, player_ship, img):
         """
         :parm angle: This is the ships current angle
         :parm ship_x: Ships x location
@@ -22,18 +22,15 @@ class Shield(Actor):
         and adds bullet speed.
         """
         super().__init__(img)
-        self._radius = 0
-        self._speed = 0
-        self._life = 0
-        self._scale = 0
-        self._center._x = ship_x
-        self._center._y = ship_y
-        self._velocity._dx = 0
-        self._velocity._dy = 0
+        self._player_ship = player_ship
+        self.change_radius(SHIELD_RADIUS)
+        print(self._radius)
+        self.change_life(SHIELD_LIFE)
+        self.change_scale(SHIELD_SCALE)
 
     def advance(self):
         """Tracks shield life"""
         super().advance()
-
-        if self._life < 1:
-            self._alive = False
+        self._center.change_position(
+            self._player_ship._center.get_x(), self._player_ship._center.get_y()
+        )

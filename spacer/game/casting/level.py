@@ -86,7 +86,7 @@ class Level(Actor):
         return self._level
 
     def set_boss(self):
-        """Sets the game as lost"""
+        """Sets the game as boss level"""
         self._boss = True
 
     def set_loss(self):

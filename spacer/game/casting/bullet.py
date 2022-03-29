@@ -11,7 +11,7 @@ class Bullet(Actor):
 
     """
 
-    def __init__(self, angle, ship_x, ship_y, ship_dx, ship_dy, img):
+    def __init__(self, angle, ship_x, ship_y, ship_dx, ship_dy, img, damage):
         """
         :parm angle: This is the ships current angle
         :parm ship_x: Ships x location
@@ -30,10 +30,14 @@ class Bullet(Actor):
         self._angle = angle
         self._center._x = ship_x
         self._center._y = ship_y
+        self._damage = damage
         self._velocity.change_velocity(
             ship_dx + math.cos(math.radians(self._angle + 90)) * self._speed,
             ship_dy + math.sin(math.radians(self._angle + 90)) * self._speed,
         )
+
+    def get_damage(self):
+        return self._damage
 
     def advance(self):
         """
@@ -42,5 +46,3 @@ class Bullet(Actor):
         """
         super().advance()
         self._life -= 1
-        if self._life < 1:
-            self._alive = False

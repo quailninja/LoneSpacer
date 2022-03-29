@@ -28,6 +28,7 @@ TITLE_LINE_HEIGHT = 100
 DEFAULT_LINE_HEIGHT = 100
 TITLE_FONT_SIZE = 40
 DEFAULT_FONT_SIZE = 18
+DEBRIS_AMOUNT = 7
 # SHIP
 SHIP_MAX_SPEED = 5
 SHIP_TURN_AMOUNT = 3
@@ -36,8 +37,17 @@ SHIP_RADIUS = 15
 SHIP_SCALE = 0.3
 PLAYER_LIFE = 50
 SHIP_GROUP = "player"
-SHIP_IMG = "spacer/assets/images/playerShip3_green.png"
-DEAD_IMG = "spacer/assets/images/spaceman.png"
+SHIP_IMG = "spacer/assets/images/playership.png"
+# SHIELD
+SHIELD_LIFE = 10
+SHIELD_SCALE = 0.1
+SHIELD_RADIUS = 20
+SHIELD_GROUP = "shield"
+SHIELD_IMG = "spacer/assets/images/shield.png"
+# LOOT
+HEALTH_IMAGE = "spacer/assets/images/health.png"
+SHIELD_IMAGE = "spacer/assets/images/powerup_shield.png"
+LOOT_GROUP = "loot"
 # BULLET
 BULLET_RADIUS = 10
 BULLET_SPEED = 10
@@ -47,9 +57,13 @@ PLAYER_BULLET_IMG = "spacer/assets/images/laserGreen11.png"
 ENEMY_BULLET_IMG = "spacer/assets/images/laserRed03.png"
 PLAYER_BULLET = "p_bullet"
 ENEMY_BULLETS = "e_bullet"
+# DAMAGE
+LOW_DAMAGE = 1
+AVERAGE_DAMAGE = 2
+HIGH_DAMAGE = 3
 # MISSILE
 MISSILE_RADIUS = 11
-MISSILE_SPEED = 7
+MISSILE_SPEED = 3
 MISSILE_LIFE = 1
 MISSILE_SCALE = 0.8
 MISSILE_IMG = "spacer/assets/images/missile.png"
@@ -60,10 +74,10 @@ BOSS_RADIUS = 40
 ENEMY_SHIP_SCALE = 0.3
 ENEMY_GROUP = "enemy"
 # SHIP IMAGES
-BLACK1_IMG = "spacer/assets/images/enemyBlack1.png"
-BLUE2_IMG = "spacer/assets/images/enemyBlue2.png"
-GREEN3_IMG = "spacer/assets/images/enemyGreen3.png"
-RED4_IMG = "spacer/assets/images/enemyRed4.png"
+ENEMY1_IMG = "spacer/assets/images/enemy1.png"
+ENEMY2_IMG = "spacer/assets/images/enemy2.png"
+ENEMY3_IMG = "spacer/assets/images/enemy3.png"
+ENEMY4_IMG = "spacer/assets/images/enemy4.png"
 BOSS_IMG = "spacer/assets/images/boss.png"
 # SPEED
 SLOW_SPEED = 1
@@ -104,6 +118,7 @@ BLACK_POINTS = 1
 GREEN_POINTS = 2
 BLUE_POINTS = 5
 RED_POINTS = 10
+BOSS_POINTS = 500
 # -------------------------------END ENEMY SHIPS--------------------------------
 # PARTICLE EFFECTS
 PARTICLE_GRAVITY = 0.05
@@ -143,10 +158,12 @@ DEMO_LEVEL_TWO = 5
 DEMO_LEVEL_THREE = 13
 DEMO_LEVEL_FOUR = 20
 DEMO_LEVEL_BOSS = 30
-# HEALTHBAR
+# HUDBAR
 HEALTHBAR_WIDTH = 120
 HEALTHBAR_HEIGHT = 25
-HEALTH_GROUP = "health"
+SHIELDBAR_WIDTH = 80
+SHIELDBAR_HEIGHT = 25
+HUD_GROUP = "health"
 # SOUNDS
 SOUND_GROUP = "sounds"
 PLAYER_LASER = "spacer/assets/sounds/laser.wav"

@@ -38,6 +38,14 @@ class Point:
         """
         return self._y
 
+    def get_position(self):
+        """Return _x and _y
+
+        Returns:
+            int: position of Actor
+        """
+        return [self._x, self._y]
+
 
 class Velocity:
     """Velocity

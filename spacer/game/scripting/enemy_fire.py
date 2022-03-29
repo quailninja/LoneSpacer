@@ -39,6 +39,7 @@ class EnemyFire(Action):
                         enemy._velocity._dx,
                         enemy._velocity._dy,
                         ENEMY_BULLET_IMG,
+                        HIGH_DAMAGE if enemy.check_boss() else LOW_DAMAGE,
                     ),
                 )
                 sounds.play_sound("enemy_laser")
@@ -53,8 +54,6 @@ class EnemyFire(Action):
                         enemy._angle,
                         enemy._center._x,
                         enemy._center._y,
-                        enemy._velocity._dx,
-                        enemy._velocity._dy,
                         player_list[0],
                     ),
                 )

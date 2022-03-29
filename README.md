@@ -49,3 +49,9 @@ root                    (project root folder)
 * David (email)
 * Samantha (email)
 * Michael (email)
+
+## Resources
+---
+All sounds are from freesound.org
+Most ship images were taken from pngegg.com
+Laser Images from kenney.nl

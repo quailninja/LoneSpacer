@@ -1,4 +1,7 @@
 import arcade
+from constants import *
+from game.casting.bullet import Bullet
+from game.casting.shield import Shield
 
 
 class KeyboardService(arcade.View):
@@ -28,3 +31,29 @@ class KeyboardService(arcade.View):
 
         if arcade.key.Q in keys:
             arcade.close_window()
+
+    def fire(self, cast):
+        ship = cast.get_first_actor(SHIP_GROUP)
+        cast.add_actor(
+            PLAYER_BULLET,
+            Bullet(
+                ship._angle,
+                ship._center._x,
+                ship._center._y,
+                ship._velocity._dx,
+                ship._velocity._dy,
+                PLAYER_BULLET_IMG,
+                LOW_DAMAGE,
+            ),
+        )
+
+    def shield_up(self, cast):
+        ship = cast.get_actors(SHIP_GROUP)
+        shield_status = cast.get_actors(SHIELD_GROUP)
+        if len(shield_status) < 1 and len(ship) > 0:
+            print("Shield Up")
+            cast.add_actor(
+                SHIELD_GROUP,
+                Shield(ship[0], SHIELD_IMG),
+            )
+            ship[0].remove_shield(1)
