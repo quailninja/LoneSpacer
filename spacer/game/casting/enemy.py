@@ -86,18 +86,18 @@ class Enemy(Actor):
         """Changes boss to true"""
         self._boss = True
 
-    def change_angle(self, num):
-        """Changes angle"""
-        self._angle = num
-
     def change_angle_correct(self, num):
         """Changes angle_correct"""
         self._angle_correct = num
 
-    def change_scale(self, num):
-        """Changes scale"""
-        self._scale = num
+    def check_boss(self):
+        """checks boss to be true"""
+        return self._boss
 
-    def change_radius(self, num):
-        """Changes radius"""
-        self._radius = num
+    def get_points(self):
+        """Return _points
+
+        Returns:
+            int: Return items point value
+        """
+        return self._points

@@ -15,17 +15,18 @@ class Missile(Enemy):
         :parm angle: This is the ships current angle
         :parm ship_x: Ships x location
         :parm ship_y: Ships y Location
-        :parm img: Image Bullet will use
-        parmaters get the ships current angel, location and speed and then match it
-        and adds bullet speed. 0 - speed, 1 - life, 2- distance,
-        3- rate, 4- swarm_distance, 5 - img, 6 - points
+        :parm player_ship: Tracks player ship
         """
         super().__init__(
             player_ship,
             [ship_x, ship_y],
             [MISSILE_SPEED, MISSILE_LIFE, 0, 5, CLOSE_SWARM, MISSILE_IMG, 1],
         )
-        self._radius = MISSILE_RADIUS
-        self._scale = MISSILE_SCALE
-        self._angle = angle
-        self._angle_correct = -90
+        self.change_radius(MISSILE_RADIUS)
+        self.change_scale(MISSILE_SCALE)
+        self.change_angle(angle)
+        self.change_angle_correct(-90)
+        self._damage = LOW_DAMAGE
+
+    def get_damage(self):
+        return self._damage

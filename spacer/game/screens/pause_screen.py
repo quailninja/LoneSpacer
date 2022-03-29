@@ -89,8 +89,19 @@ class PauseScreen(arcade.View):
         arcade.draw_lrwh_rectangle_textured(
             0, 0, self.window.width, self.window.height, self._background_img
         )
-        self.game_view._cast.get_first_actor(SCORE_GROUP).draw()
-        self.game_view._cast.get_first_actor(LEVEL_GROUP).draw()
-        self.game_view._cast.get_first_actor(SHIP_GROUP).draw()
-        self.game_view._cast.get_first_actor(HEALTH_GROUP).draw()
+        game_screen = self.game_view._cast.get_all_actors()
+        for item in game_screen:
+            item.draw()
+
         self.manager.draw()
+
+    def on_key_press(self, key, key_modifiers):
+        """Keeps track of all keys that are pressed
+
+        Args:
+            key (int): What key is being pressed
+            key_modifiers (int): I think this is also an integer.
+            Checks to see if any modifiers like the shift key are being held down.
+        """
+        if key == arcade.key.ESCAPE:
+            self.window.show_view(self.game_view)

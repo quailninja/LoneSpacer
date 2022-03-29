@@ -17,6 +17,7 @@ class Actor(arcade.Sprite):
         _angle (int) = The direction the texture is facing
         _speed (int) = How fast the Actor can move.
         _scale (int) = Size of the texture
+        _life (int) = The actors life
         _font_size (int) = Font size for text based actors.
         _font (str) = Type of font for text based actors
     """
@@ -34,17 +35,19 @@ class Actor(arcade.Sprite):
         self._angle = 0
         self._speed = 0
         self._scale = 1
+        self._life = 1
         self._font_size = HUD_FONT_SIZE
         self._font = HUD_FONT_NAME
 
     def advance(self):
         """
-        All objects will use this to move on screen.  All life checks
-        for objects that can be destroyed should be put in this function.
+        All objects will use this to move on screen.  This will also do a life check.
         """
         self.wrap()
         self._center._x += self._velocity._dx
         self._center._y += self._velocity._dy
+        if self._life < 1:
+            self._alive = False
 
     def draw(self):
         """
@@ -73,8 +76,56 @@ class Actor(arcade.Sprite):
         """
         self._texture = arcade.load_texture(img)
 
-    def load_sound(self, file):
-        self._sound = arcade.load_sound(file)
+    def change_angle(self, num):
+        """Changes angle"""
+        self._angle = num
 
-    def play_sound(self):
-        arcade.play_sound(self._sound)
+    def change_scale(self, num):
+        """Changes scale
+        :parm num: integer
+        """
+        self._scale = num
+
+    def change_radius(self, num):
+        """Changes radius
+        :parm num: integer
+        """
+        self._radius = num
+
+    def change_font(self, font):
+        """Changes angle_correct
+        :parm font: string, font name
+        """
+        self._font = font
+
+    def change_font_size(self, num):
+        """Changes angle_correct
+        :parm num: integer
+        """
+        self._font_size = num
+
+    def change_speed(self, num):
+        """Changes _speed
+        :parm num: integer
+        """
+        self._speed = num
+
+    def change_life(self, num):
+        """Changes _life
+        :parm num: integer
+        """
+        self._life = num
+
+    def kill(self):
+        """changes _alive to false"""
+        self._alive = False
+
+    def add_damage(self, num):
+        """Adds damage amount to actor"""
+        self._life -= num
+
+    def get_life(self):
+        """
+        Returns Actors current life
+        """
+        return self._life

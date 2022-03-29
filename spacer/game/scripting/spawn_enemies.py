@@ -121,7 +121,7 @@ class SpawnEnemies(Action):
         rate = SLOW_SHOT_RATE
         range = MEDIUM_RANGE
         swarm = CLOSE_SWARM
-        img = BLACK1_IMG
+        img = ENEMY1_IMG
         points = BLACK_POINTS
         return [speed, life, rate, range, swarm, img, points]
 
@@ -131,7 +131,7 @@ class SpawnEnemies(Action):
         rate = FAST_SHOT_RATE
         range = CLOSE_RANGE
         swarm = CLOSE_SWARM
-        img = GREEN3_IMG
+        img = ENEMY2_IMG
         points = GREEN_POINTS
         return [speed, life, rate, range, swarm, img, points]
 
@@ -141,7 +141,7 @@ class SpawnEnemies(Action):
         rate = AVERAGE_SHOT_RATE
         range = FAR_RANGE
         swarm = CLOSE_SWARM
-        img = BLUE2_IMG
+        img = ENEMY3_IMG
         points = BLUE_POINTS
         return [speed, life, rate, range, swarm, img, points]
 
@@ -151,7 +151,7 @@ class SpawnEnemies(Action):
         rate = FAST_SHOT_RATE
         range = CLOSE_RANGE
         swarm = CLOSE_SWARM
-        img = RED4_IMG
+        img = ENEMY4_IMG
         points = RED_POINTS
         return [speed, life, rate, range, swarm, img, points]
 

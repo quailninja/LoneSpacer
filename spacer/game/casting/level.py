@@ -15,7 +15,7 @@ class Level(Actor):
 
     def __init__(self, demo):
         super().__init__()
-        self._level = 5
+        self._level = 1
         self._spawn_rate = MEDIUM_SPAWN_RATE
         self._center.change_position(20, SCREEN_HEIGHT - HUD_SPACE)
         self._demo = demo
