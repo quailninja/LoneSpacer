@@ -51,7 +51,11 @@ class SpawnEnemies(Action):
                             self.boss(),
                         ),
                     )
-                    cast.get_first_actor(ENEMY_GROUP).boss_update()
+                    boss = cast.get_first_actor(ENEMY_GROUP)
+                    boss.set_boss()
+                    boss.change_angle(0)
+                    boss.change_angle_correct(-90)
+                    boss.change_radius(BOSS_RADIUS)
                     level.set_boss()
                     self._spawn_on = False
                 elif level.get_level() > 3:
@@ -149,7 +153,6 @@ class SpawnEnemies(Action):
         swarm = CLOSE_SWARM
         img = RED4_IMG
         points = RED_POINTS
-
         return [speed, life, rate, range, swarm, img, points]
 
     def boss(self):
@@ -159,5 +162,5 @@ class SpawnEnemies(Action):
         range = BOSS_RANGE
         swarm = CLOSE_SWARM
         img = BOSS_IMG
-        points = 500
+        points = BOSS_POINTS
         return [speed, life, rate, range, swarm, img, points]

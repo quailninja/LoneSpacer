@@ -104,6 +104,7 @@ BLACK_POINTS = 1
 GREEN_POINTS = 2
 BLUE_POINTS = 5
 RED_POINTS = 10
+BOSS_POINTS = 500
 # -------------------------------END ENEMY SHIPS--------------------------------
 # PARTICLE EFFECTS
 PARTICLE_GRAVITY = 0.05

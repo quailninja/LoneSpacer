@@ -15,7 +15,7 @@ class Level(Actor):
 
     def __init__(self, demo):
         super().__init__()
-        self._level = 1
+        self._level = 5
         self._spawn_rate = MEDIUM_SPAWN_RATE
         self._center.change_position(20, SCREEN_HEIGHT - HUD_SPACE)
         self._demo = demo
@@ -86,7 +86,7 @@ class Level(Actor):
         return self._level
 
     def set_boss(self):
-        """Sets the game as lost"""
+        """Sets the game as boss level"""
         self._boss = True
 
     def set_loss(self):

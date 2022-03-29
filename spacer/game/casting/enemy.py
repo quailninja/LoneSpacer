@@ -14,13 +14,16 @@ class Enemy(Actor):
         _shot_rate (int): How fast the enemy can fire enemy
         _swarm_distance (int): How close enemy ships will get to eachother
         _points (int): How many points the enemy is worth
+        _angel_correct(int): This is used for the enemy tracking, it will orient the
+        enemy image to the correct position when trying to face the player.
+        _boss (bool): Whether the enemy is a boss or not
     """
 
     def __init__(self, player_ship, xy, stat):
         """
         :parm player_ship: This is the player ship, needed for enemy tracking
         :parm xy: The x and y points for the enemy to spawn
-        :parm stat: A list of stats values for the enemy 0 - speed, 1 - life, 2- distance,
+        :parm stat: A list of stats values for the enemy 0 - speed, 1 - life, 2- range,
         3- rate, 4- swarm_distance, 5 - img, 6 - points
         """
         super().__init__(stat[5])
@@ -79,9 +82,22 @@ class Enemy(Actor):
         if self._life < 1:
             self._alive = False
 
-    def boss_update(self):
+    def set_boss(self):
+        """Changes boss to true"""
         self._boss = True
-        self._radius = BOSS_RADIUS
-        self._angle = 0
-        self._angle_correct = -90
-        self._bullet_angle_correct = 0
+
+    def change_angle(self, num):
+        """Changes angle"""
+        self._angle = num
+
+    def change_angle_correct(self, num):
+        """Changes angle_correct"""
+        self._angle_correct = num
+
+    def change_scale(self, num):
+        """Changes scale"""
+        self._scale = num
+
+    def change_radius(self, num):
+        """Changes radius"""
+        self._radius = num
