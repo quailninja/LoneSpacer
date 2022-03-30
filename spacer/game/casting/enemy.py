@@ -14,6 +14,7 @@ class Enemy(Actor):
         _shot_rate (int): How fast the enemy can fire enemy
         _swarm_distance (int): How close enemy ships will get to eachother
         _points (int): How many points the enemy is worth
+        _bullet_angel_correct(int): Needed for enemies bullet img to orient correctly on the screen.
         _angel_correct(int): This is used for the enemy tracking, it will orient the
         enemy image to the correct position when trying to face the player.
         _boss (bool): Whether the enemy is a boss or not
@@ -28,14 +29,14 @@ class Enemy(Actor):
         """
         super().__init__(stat[5])
         self._center.change_position(xy[0], xy[1])
-        self._scale = ENEMY_SHIP_SCALE
-        self._radius = ENEMY_SHIP_RADIUS
-        self._speed = stat[0]
+        self.change_scale(ENEMY_SHIP_SCALE)
+        self.change_radius(ENEMY_SHIP_RADIUS)
+        self.change_speed(stat[0])
+        self.change_life(stat[1])
+        self.change_angle(45)
         self._player_ship = player_ship
-        self._angle = 45
         self._bullet_angle_correct = 180
         self._angle_correct = 90
-        self._life = stat[1]
         self._range = stat[2]
         self._shot_rate = stat[3]
         self._swarm_distance = stat[4]
@@ -46,7 +47,7 @@ class Enemy(Actor):
         """
         This function will move the current sprite towards the player ship
         based off the players location.  This will also have the enemy ships angle
-        or point there ship in the direciton of the player.
+        or point there ship in the direction of the player.
         """
         start_x = self._center._x
         start_y = self._center._y

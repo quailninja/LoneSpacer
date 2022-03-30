@@ -11,6 +11,10 @@ class Level(Actor):
     Attributes:
         _level (int): The game level
         _spawn_rate (int): How fast Enemies spawn
+        _demo (bool): True or False makes the game levels short - Put in for grading purposes
+        _boss (bool): If it's the boss level
+        _win (bool): Game was won
+        _lost (bool): Game was lost
     """
 
     def __init__(self, demo):

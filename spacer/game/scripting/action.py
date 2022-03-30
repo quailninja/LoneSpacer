@@ -6,7 +6,7 @@ class Action:
     """
 
     def execute(self, cast):
-        """Executes something that is important in the game. This method should be overriden by
+        """Executes something that is important in the game. This method should be overridden by
         derived classes.
 
         Args:

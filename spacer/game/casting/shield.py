@@ -8,6 +8,9 @@ class Shield(Actor):
 
     This class is responsible for all shields in the game.
 
+    Arguments
+    _player_ship (class): The players ship
+
     """
 
     def __init__(self, player_ship, img):

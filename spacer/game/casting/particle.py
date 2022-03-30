@@ -5,7 +5,16 @@ import math
 
 
 class Smoke(arcade.SpriteCircle):
-    """This represents a puff of smoke"""
+    """
+    Smoke
+
+    This class is responsible for all particles in the game
+    #TODO - Try to get this working for ship thrusters
+
+    Attributes:
+        change_y(int): part of arcade, this is akin to velocity
+        scale(int): Size of the smoke, helps it grow
+    """
 
     def __init__(self, size):
         super().__init__(size, arcade.color.LIGHT_GRAY, soft=True)
@@ -13,11 +22,26 @@ class Smoke(arcade.SpriteCircle):
         self.scale = SMOKE_START_SCALE
 
     def advance(self):
+        """Not Implemented"""
         pass
 
 
 class Particle(arcade.SpriteCircle):
-    """Explosion of particles"""
+    """
+    Particles
+
+    This class is responsible for all particles in the game
+    #TODO - Try to get this working for ship thrusters
+
+    Attributes:
+        color (class): random color from arcade colors
+        normal_texture (self): this is a snap shot of it's self to help create sparkle effect
+        speed (int): how fast the particle will move
+        direction(int): random direction of the particle
+        change_x(int): part of arcade, this is akin to velocity
+        change_y(int): part of arcade, this is akin to velocity
+        my_alpha(int): particles opacity
+    """
 
     def __init__(self, my_list):
         color = random.choice(PARTICLE_COLORS)
@@ -30,4 +54,5 @@ class Particle(arcade.SpriteCircle):
         self.my_alpha = 255
 
     def advance(self):
+        """Not Implemented"""
         pass

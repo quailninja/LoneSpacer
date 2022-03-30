@@ -1,9 +1,8 @@
 from game.casting.actor import Actor
 from constants import *
-import math
 
 
-class Bullet(Actor):
+class Announcement(Actor):
     """
     Bullets
 
@@ -11,7 +10,7 @@ class Bullet(Actor):
 
     """
 
-    def __init__(self, angle, ship_x, ship_y, ship_dx, ship_dy, img, damage):
+    def __init__(self, message):
         """
         :parm angle: This is the ships current angle
         :parm ship_x: Ships x location
@@ -22,21 +21,20 @@ class Bullet(Actor):
         parmaters get the ships current angel, location and speed and then match it
         and adds bullet speed.
         """
-        super().__init__(img)
-        self.change_radius(BULLET_RADIUS)
-        self.change_speed(BULLET_SPEED)
-        self.change_life(BULLET_LIFE)
-        self.change_scale(BULLET_SCALE)
-        self.change_angle(angle)
-        self._center.change_position(ship_x, ship_y)
-        self._damage = damage
-        self._velocity.change_velocity(
-            ship_dx + math.cos(math.radians(self._angle + 90)) * self._speed,
-            ship_dy + math.sin(math.radians(self._angle + 90)) * self._speed,
-        )
+        super().__init__()
+        self.change_life(ANNOUNCEMENT_TIME)
+        self._center.change_position(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        self._message = message
 
-    def get_damage(self):
-        return self._damage
+    def draw(self):
+        arcade.draw_text(
+            self._message,
+            self._center._x,
+            self._center._y,
+            arcade.color.WHITE,
+            self._font_size,
+            font_name=self._font,
+        )
 
     def advance(self):
         """

@@ -24,6 +24,7 @@ class CheckAlive(Action):
         player = cast.get_actors(SHIP_GROUP)
         loot = cast.get_actors(LOOT_GROUP)
         shield = cast.get_actors(SHIELD_GROUP)
+        announcements = cast.get_actors(ANNOUNCEMENT_GROUP)
 
         self.remove_items(bullet_list, PLAYER_BULLET, cast)
         self.remove_items(enemy_bullets, ENEMY_BULLETS, cast)
@@ -31,6 +32,7 @@ class CheckAlive(Action):
         self.remove_items(player, SHIP_GROUP, cast)
         self.remove_items(loot, LOOT_GROUP, cast)
         self.remove_items(shield, SHIELD_GROUP, cast)
+        self.remove_items(announcements, ANNOUNCEMENT_GROUP, cast)
 
     def remove_items(self, cast_list, group, cast):
         """
@@ -50,9 +52,9 @@ class CheckAlive(Action):
                     smoke.position = (item._center._x, item._center._y)
                     cast.add_actor(SMOKE_GROUP, smoke)
                     sound.play_sound("explosion")
-                if group == ENEMY_GROUP:
+                if group == ENEMY_GROUP and item._radius != MISSILE_RADIUS:
                     cast.get_first_actor(SCORE_GROUP).add_points(item.get_points())
-                    if randint(0, 5) == 0:
+                    if randint(0, 4) == 0:
                         num = randint(0, 100)
                         position = item._center.get_position()
                         if num < 80:

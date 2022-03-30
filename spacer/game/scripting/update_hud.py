@@ -4,7 +4,7 @@ from constants import *
 
 class UpdateHUD(Action):
     """
-    Updates hit poitns for healthbar
+    Updates hit points for healthbar
     """
 
     def execute(self, cast):
