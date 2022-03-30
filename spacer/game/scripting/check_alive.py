@@ -52,20 +52,23 @@ class CheckAlive(Action):
                     sound.play_sound("explosion")
                 if group == ENEMY_GROUP:
                     cast.get_first_actor(SCORE_GROUP).add_points(item.get_points())
-                    if randint(0, 1) == 0:
+                    if randint(0, 5) == 0:
                         num = randint(0, 100)
                         position = item._center.get_position()
-                        if num < 85:
+                        if num < 80:
                             self.loot_create(cast, position, HEALTH_IMAGE, "health")
                         else:
                             self.loot_create(cast, position, SHIELD_IMAGE, "shield")
                 if group == LOOT_GROUP:
-                    ship = cast.get_first_actor(SHIP_GROUP)
+                    ship = cast.get_actors(SHIP_GROUP)
                     value = item.get_value()
-                    if item.get_loot_type() == "health":
-                        ship.add_life(value)
-                    elif item.get_loot_type() == "shield":
-                        ship.add_shield(value)
+                    if len(ship) > 0:
+                        if item.get_loot_type() == "health":
+                            ship[0].add_life(value)
+                        elif item.get_loot_type() == "shield":
+                            ship[0].add_shield(value)
+                if group == SHIELD_GROUP:
+                    cast.get_first_actor(SOUND_GROUP).play_sound("shield_down")
                 cast.remove_actor(group, item)
 
     def loot_create(self, cast, xy, img, loot_type):

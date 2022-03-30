@@ -19,7 +19,7 @@ class Ship(Actor):
         self.change_radius(SHIP_RADIUS)
         self.change_speed(SHIP_THRUST_AMOUNT)
         self.change_life(PLAYER_LIFE)
-        self._shield_count = 5
+        self._shield_count = 1
         self._onecount = True
 
     def turn_right(self):

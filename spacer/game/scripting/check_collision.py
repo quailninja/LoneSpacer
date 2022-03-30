@@ -36,7 +36,7 @@ class CheckCollision(Action):
             self.check_collision_bullets(enemy_bullets, player_list)
             self.check_collision_bullets(missile_list, player_list)
             self.check_collision_ships(enemy_list, player_list)
-        self.check_collision_bullets(bullet_list, enemy_list)
+        self.check_collision_bullets(bullet_list, enemies)
         for loot in loot_list:
             for player in player_list:
                 distance = loot._radius + player._radius

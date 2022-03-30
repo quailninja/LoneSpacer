@@ -24,7 +24,6 @@ class Shield(Actor):
         super().__init__(img)
         self._player_ship = player_ship
         self.change_radius(SHIELD_RADIUS)
-        print(self._radius)
         self.change_life(SHIELD_LIFE)
         self.change_scale(SHIELD_SCALE)
 
