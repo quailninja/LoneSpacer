@@ -11,6 +11,7 @@ class Loot(Actor):
 
     Attributes:
         _loot_type (str): List item type as a string
+        _spin (float): Random number for how fast item spins
     """
 
     def __init__(self, xy, img, loot_type):
@@ -57,3 +58,7 @@ class Loot(Actor):
             int: self._value
         """
         return self._value
+
+    def advance(self):
+        super().advance()
+        self._angle += 0.33
