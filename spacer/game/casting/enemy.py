@@ -91,6 +91,10 @@ class Enemy(Actor):
         """Changes angle_correct"""
         self._angle_correct = num
 
+    def change_bullet_angle_correct(self, num):
+        """Changes bullet_angle_correct"""
+        self._bullet_angle_correct = num
+
     def check_boss(self):
         """checks boss to be true"""
         return self._boss
