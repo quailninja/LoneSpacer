@@ -14,11 +14,13 @@ class StartScreen(arcade.View):
 
     Attributes:
         _background_img: Loads background image for game
-        manager (class): Creates an instance of a UImanager class from arcade
+        manager (class): Creates an instance of a UIManager class from arcade
         game_view (class): Current game state
         v_box (class): Controls layout of pause menu, instance of UIBoxLayout
-        debri_list (list): A list of randomly generated debri items
-        title_sound (class): Instances of Sounds class
+        debris_list (list): A list of randomly generated debris items
+        demo (bool): Demo mode for professor and testing
+        demo_label: This lets the player know if demo mode is enabled
+        sound (class): Instance of Sounds class
     """
 
     def __init__(self):
@@ -27,14 +29,14 @@ class StartScreen(arcade.View):
         self.manager = arcade.gui.UIManager()
         self.manager.enable()
         self.v_box = arcade.gui.UIBoxLayout()
-        self.debri_list = []
+        self.debris_list = []
         self.demo = False
         self.demo_label = ""
         self.sounds = Sounds()
         self.sounds.play_sound("title", True)
         for x in range(DEBRIS_AMOUNT):
             debris = Debris()
-            self.debri_list.append(debris)
+            self.debris_list.append(debris)
 
         title = arcade.gui.UITextArea(
             text=SCREEN_TITLE,
@@ -114,8 +116,8 @@ class StartScreen(arcade.View):
         arcade.draw_lrwh_rectangle_textured(
             0, 0, self.window.width, self.window.height, self._background_img
         )
-        for debri in self.debri_list:
-            debri.draw()
+        for debris in self.debris_list:
+            debris.draw()
         self.manager.draw()
         arcade.draw_text(
             self.demo_label,
@@ -127,13 +129,13 @@ class StartScreen(arcade.View):
         )
 
     def update(self, delta_time):
-        """Moves all debri on the screen
+        """Moves all debris on the screen
 
         Args:
             delta_time (_type_): tells us how much time has actually elapsed
         """
-        for debri in self.debri_list:
-            debri.advance()
-            debri.spin()
+        for debris in self.debris_list:
+            debris.advance()
+            debris.spin()
 
         self.manager

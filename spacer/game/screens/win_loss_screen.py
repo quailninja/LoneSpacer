@@ -3,15 +3,17 @@ from constants import *
 
 
 class EndView(arcade.View):
-    """Instruction Screen
-    This is the first screen shown to players when the game starts.
+    """Won/Loss Screen
+    This is the end of game and will either show Victory or Defeat
     Attributes:
-        return_view (class): Previous screen
+        win (bool): If the game was won or lost
+        game_view (class): Game Screen used to show score
     """
 
-    def __init__(self, win):
+    def __init__(self, win, game_view):
         super().__init__()
         self.win = win
+        self._game_view = game_view
 
     def on_show(self):
         """Updates the background and resets user view
@@ -80,6 +82,7 @@ class EndView(arcade.View):
             anchor_x="center",
             font_name=HUD_FONT_NAME,
         )
+        self._game_view._cast.get_first_actor(SCORE_GROUP).draw()
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         """Waits to detect mouse click from user

@@ -150,6 +150,6 @@ class GameScreen(arcade.View):
         """Checks if current game has met game ending conditions"""
         level = self._cast.get_first_actor(LEVEL_GROUP)
         if level.check_win():
-            self.window.show_view(EndView(True))
+            self.window.show_view(EndView(True, self))
         elif level.check_lost():
-            self.window.show_view(EndView(False))
+            self.window.show_view(EndView(False, self))

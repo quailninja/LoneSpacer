@@ -33,6 +33,11 @@ class KeyboardService(arcade.View):
             arcade.close_window()
 
     def fire(self, cast):
+        """Fires ships laser
+
+        Args:
+            cast (list): list of actors in the game
+        """
         ship = cast.get_first_actor(SHIP_GROUP)
         cast.add_actor(
             PLAYER_BULLET,
@@ -49,6 +54,11 @@ class KeyboardService(arcade.View):
         cast.get_first_actor(SOUND_GROUP).play_sound("player_laser")
 
     def shield_up(self, cast):
+        """Sets ship shields
+
+        Args:
+            cast (list): list of actors in the game
+        """
         ship = cast.get_actors(SHIP_GROUP)
         shield_status = cast.get_actors(SHIELD_GROUP)
         if len(shield_status) < 1 and len(ship) > 0:

@@ -3,7 +3,7 @@ from game.screens.start_screen import StartScreen
 import arcade
 
 arcade.load_font("spacer/assets/text/SpaceMission-rgyw9.otf")
-arcade.load_font("spacer/assets/text/RaceGuard-7bPoE.otf")
+arcade.load_font("spacer/assets/text/RaceGuard-7BPoE.otf")
 
 
 def main():

@@ -7,7 +7,7 @@ from random import choice, randint
 class Debris(Actor):
     """Actors used for title screen
 
-    The responsibility of the debri class is to randomly generate debri for each
+    The responsibility of the debris class is to randomly generate debris for each
     the title screen.
 
     Attributes:
@@ -15,7 +15,7 @@ class Debris(Actor):
     """
 
     def __init__(self):
-        super().__init__("spacer/assets/images/debri" + str(randint(1, 15)) + ".png")
+        super().__init__("spacer/assets/images/debris" + str(randint(1, 15)) + ".png")
         self._speed = choice([i for i in range(-4, 4) if i not in [0]])
         self._spin_type = choice([i for i in range(-4, 4) if i not in [0]])
         self._center.change_position(
@@ -30,6 +30,6 @@ class Debris(Actor):
 
     def spin(self):
         """
-        Makes debri objects on title screen rotate
+        Makes debris objects on title screen rotate
         """
         self._angle += self._spin_type

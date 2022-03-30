@@ -9,7 +9,8 @@ class ShieldBar(Actor):
 
     Attributes:
         _current_shield (int): The current shield value
-        _max_hp (int): The max shield amount
+        _max_shield (int): The max shield amount
+        _shield_activations (int): The number of shields the player has
     """
 
     def __init__(self):

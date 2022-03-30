@@ -54,7 +54,7 @@ class Velocity:
 
     Attributes:
         dx (int): how fast an object moves on the x axis point
-        dy (int): how fast an ojbect moves on the y axis point
+        dy (int): how fast an object moves on the y axis point
 
     """
 
@@ -73,7 +73,7 @@ class Velocity:
         self._dy = dy
 
     def get_dx(self):
-        """Returns x direciton
+        """Returns x direction
 
         Returns:
             int: Returns dx
@@ -81,7 +81,7 @@ class Velocity:
         return self._dx
 
     def get_dy(self):
-        """Returns y direciton
+        """Returns y direction
 
         Returns:
             int: Returns dy

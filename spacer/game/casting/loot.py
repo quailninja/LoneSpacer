@@ -5,22 +5,19 @@ from constants import *
 
 class Loot(Actor):
     """
-    A shield that goes around the ship
+    Anything dropped by enemies
 
     This class is responsible for all loot in the game.
 
+    Attributes:
+        _loot_type (str): List item type as a string
     """
 
     def __init__(self, xy, img, loot_type):
         """
-        :parm angle: This is the ships current angle
-        :parm ship_x: Ships x location
-        :parm ship_y: Ships y Location
-        :parm ship_dx: Ships speed on x axis
-        :parm ship_dy: Ships speed on Y axis
+        :parm xy: This is a list of the x y coordinates
         :parm img: Image Bullet will use
-        parmaters get the ships current angel, location and speed and then match it
-        and adds bullet speed.
+        :parm loot_type: String, item name
         """
         super().__init__(img)
         self.change_scale(0.25)

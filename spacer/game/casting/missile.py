@@ -8,6 +8,8 @@ class Missile(Enemy):
 
     This class is responsible for all bullets in the game.
 
+    Attributes:
+        _damage (int): How much damage missile does
     """
 
     def __init__(self, angle, ship_x, ship_y, player_ship):
