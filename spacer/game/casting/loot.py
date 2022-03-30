@@ -23,8 +23,8 @@ class Loot(Actor):
         and adds bullet speed.
         """
         super().__init__(img)
-        self.change_scale(0.6)
-        self.change_radius = 6
+        self.change_scale(0.25)
+        self.change_radius = 8
         self._center.change_position(xy[0], xy[1])
         self._loot_type = loot_type
         num = randint(0, 100)

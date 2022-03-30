@@ -126,7 +126,6 @@ class GameScreen(arcade.View):
         """
         if key == arcade.key.SPACE:
             self._keyboard_services.fire(self._cast)
-            self._cast.get_first_actor(SOUND_GROUP).play_sound("player_laser")
         elif key == arcade.key.ESCAPE:
             pause = PauseScreen(self)
             self.window.show_view(pause)

@@ -47,6 +47,8 @@ class Sounds:
             "background": Sound(BACKGROUND_MUSIC),
             "title": Sound(TITLE_MUSIC),
             "missile": Sound(MISSILE),
+            "shield_up": Sound(SHIELD_UP),
+            "shield_down": Sound(SHIELD_DOWN),
         }
 
     def play_sound(self, key, loop=False):

@@ -46,14 +46,16 @@ class KeyboardService(arcade.View):
                 LOW_DAMAGE,
             ),
         )
+        cast.get_first_actor(SOUND_GROUP).play_sound("player_laser")
 
     def shield_up(self, cast):
         ship = cast.get_actors(SHIP_GROUP)
         shield_status = cast.get_actors(SHIELD_GROUP)
         if len(shield_status) < 1 and len(ship) > 0:
-            print("Shield Up")
-            cast.add_actor(
-                SHIELD_GROUP,
-                Shield(ship[0], SHIELD_IMG),
-            )
-            ship[0].remove_shield(1)
+            if ship[0].get_shield_count() > 0:
+                cast.add_actor(
+                    SHIELD_GROUP,
+                    Shield(ship[0], SHIELD_IMG),
+                )
+                ship[0].remove_shield(1)
+                cast.get_first_actor(SOUND_GROUP).play_sound("shield_up")
