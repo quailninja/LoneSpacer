@@ -38,7 +38,7 @@ class SpawnEnemies(Action):
         if len(player_list) > 0 and self._spawn_on:
             if (
                 len(enemy_list) <= MAXIMUM_ENEMIES
-                and r.randint(0, level._spawn_rate) == 0
+                and r.randint(0, level.get_spawn_rate()) == 0
             ):
                 if level.get_level() > 4:
                     for enemy in enemy_list:
