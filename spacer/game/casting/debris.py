@@ -24,8 +24,8 @@ class Debris(Actor):
         )
         self._direction = randint(1, 300)
         self._velocity.change_velocity(
-            math.cos(math.radians(self._angle + 90)) * self._speed,
-            math.sin(math.radians(self._angle + 90)) * self._speed,
+            math.cos(math.radians(self._angle)) * self._speed,
+            math.sin(math.radians(self._angle)) * self._speed,
         )
 
     def spin(self):
