@@ -55,6 +55,7 @@ class SpawnEnemies(Action):
                     boss.set_boss()
                     boss.change_angle(0)
                     boss.change_angle_correct(-90)
+                    boss.change_bullet_angle_correct(0)
                     boss.change_radius(BOSS_RADIUS)
                     level.set_boss()
                     self._spawn_on = False
