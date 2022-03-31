@@ -2,11 +2,11 @@ import arcade
 from constants import *
 from game.casting.cast import Cast
 from game.casting.ship import Ship
-from game.casting.shield import Shield
 from game.casting.score import Score
 from game.casting.level import Level
 from game.casting.health_bar import HealthBar
 from game.casting.shield_bar import ShieldBar
+from game.casting.particle import ParticleTracker
 from game.services.keyboard_services import KeyboardService
 from game.services.fps import FPS
 from game.scripting.check_alive import CheckAlive
@@ -55,6 +55,7 @@ class GameScreen(arcade.View):
         self._cast.add_actor(HUD_GROUP, HealthBar())
         self._cast.add_actor(HUD_GROUP, ShieldBar())
         self._cast.add_actor(SOUND_GROUP, sounds)
+        self._particles = ParticleTracker()
         self._keyboard_services = KeyboardService()
         self._fps = FPS()
         self._game_on = self._cast.get_first_actor(SHIP_GROUP)
@@ -63,12 +64,12 @@ class GameScreen(arcade.View):
         self._scripts.add_action("update", SpawnEnemies())
         self._scripts.add_action("update", EnemyFire())
         self._scripts.add_action("update", CheckCollision())
-        self._scripts.add_action("update", Explosion())
-        self._scripts.add_action("update", SmokeEffect())
+        self._scripts.add_action("particle", Explosion())
+        self._scripts.add_action("particle", SmokeEffect())
         self._scripts.add_action("update", CheckLevel())
         self._scripts.add_action("update", UpdateHUD())
         self._scripts.add_action("update", CheckWin())
-        self._scripts.add_action("update", CheckAlive())
+        self._scripts.add_action("particle", CheckAlive())
         self._scripts.add_action("update", HUD())
 
     def on_show(self):
@@ -81,7 +82,7 @@ class GameScreen(arcade.View):
     def on_draw(self):
         """
         Called automatically by the arcade framework.
-        Handles the responsiblity of drawing all elements.
+        Handles the responsibility of drawing all elements.
         """
         self.clear()
         self._fps.calculate_FPS()
@@ -90,6 +91,9 @@ class GameScreen(arcade.View):
         )
 
         for item in self._cast.get_all_actors():
+            item.draw()
+
+        for item in self._particles.get_all_particles():
             item.draw()
 
         self._fps.draw_FPS()
@@ -111,8 +115,8 @@ class GameScreen(arcade.View):
         for action in self._scripts.get_actions("update"):
             action.execute(self._cast)
 
-        for object in self._cast.get_all_actors():
-            object.advance()
+        for action in self._scripts.get_actions("particle"):
+            action.execute(self._cast, self._particles)
 
         self._fps.processing(start_time)
 

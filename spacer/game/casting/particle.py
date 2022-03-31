@@ -43,7 +43,7 @@ class Particle(arcade.SpriteCircle):
         my_alpha(int): particles opacity
     """
 
-    def __init__(self, my_list):
+    def __init__(self):
         color = random.choice(PARTICLE_COLORS)
         super().__init__(PARTICLE_RADIUS, color)
         self.normal_texture = self.texture
@@ -56,3 +56,55 @@ class Particle(arcade.SpriteCircle):
     def advance(self):
         """Not Implemented"""
         pass
+
+
+class ParticleTracker:
+    """A collection of Particles.
+
+    The responsibility of the particle tracker is to keep track of the particles.
+
+    Attributes:
+        _particles (dict): A dictionary of particles { key: group_name, value: a list of particles }
+    """
+
+    def __init__(self):
+        """Constructs a new particle."""
+        self._particles = {}
+
+    def add_particle(self, group, particle):
+        """Adds an particle to the given group.
+
+        Args:
+            group (string): The name of the group.
+            particle (Particle): The particle to add.
+        """
+        if not group in self._particles.keys():
+            self._particles[group] = arcade.SpriteList()
+
+        if not particle in self._particles[group]:
+            self._particles[group].append(particle)
+
+    def get_particles(self, group):
+        """Gets the particle in the given group.
+
+        Args:
+            group (string): The name of the group.
+
+        Returns:
+            List: The particle in the group.
+        """
+        results = []
+        if group in self._particles.keys():
+            results = self._particles.get(group)
+        return results
+
+    def get_all_particles(self):
+        """Gets all of the particle in the cast.
+
+        Returns:
+            List: All of the particle in the cast.
+        """
+        results = []
+        for group in self._particles:
+            results.append(self._particles.get(group))
+        return results

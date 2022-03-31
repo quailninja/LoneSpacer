@@ -121,7 +121,7 @@ class SpawnEnemies(Action):
         life = LOW_HEALTH
         rate = SLOW_SHOT_RATE
         range = MEDIUM_RANGE
-        swarm = CLOSE_SWARM
+        swarm = AVERAGE_SWARM
         img = ENEMY1_IMG
         points = BLACK_POINTS
         return [speed, life, rate, range, swarm, img, points]

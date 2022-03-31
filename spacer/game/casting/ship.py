@@ -17,7 +17,6 @@ class Ship(Actor):
         self._center.change_position(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         self.change_scale(SHIP_SCALE)
         self.change_radius(SHIP_RADIUS)
-        self.change_speed(SHIP_THRUST_AMOUNT)
         self.change_life(PLAYER_LIFE)
         self._shield_count = 1
         self._onecount = True
@@ -32,16 +31,13 @@ class Ship(Actor):
         """Turns the ship left"""
         self._angle += SHIP_TURN_AMOUNT
 
-    def engine(self, direction):
+    def engine(self, speed):
         """
         Allows the ship to go forward or backwards
         """
-        if direction == "forward":
-            self._velocity._dx += math.cos(math.radians(self._angle + 90)) * self._speed
-            self._velocity._dy += math.sin(math.radians(self._angle + 90)) * self._speed
-        elif direction == "reverse":
-            self._velocity._dx -= math.cos(math.radians(self._angle + 90)) * self._speed
-            self._velocity._dy -= math.sin(math.radians(self._angle + 90)) * self._speed
+        self._velocity._dx += math.cos(math.radians(self._angle + 90)) * speed
+        self._velocity._dy += math.sin(math.radians(self._angle + 90)) * speed
+
         self.speed_check()
 
     def speed_check(self):
