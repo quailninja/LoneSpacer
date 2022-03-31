@@ -30,9 +30,13 @@ class CheckLevel(Action):
         else:
             if score > LEVEL_TWO and level.get_level() < 2:
                 level.level_up()
+                cast.add_actor(ANNOUNCEMENT_GROUP, Announcement("Level 2"))
             elif score > LEVEL_THREE and level.get_level() < 3:
                 level.level_up()
+                cast.add_actor(ANNOUNCEMENT_GROUP, Announcement("Level 3"))
             elif score > LEVEL_FOUR and level.get_level() < 4:
                 level.level_up()
+                cast.add_actor(ANNOUNCEMENT_GROUP, Announcement("Level 4"))
             elif score > LEVEL_BOSS and level.get_level() < 5:
                 level.level_up()
+                cast.add_actor(ANNOUNCEMENT_GROUP, Announcement("Boss Level!!!"))
