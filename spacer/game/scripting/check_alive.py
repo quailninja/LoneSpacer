@@ -43,8 +43,7 @@ class CheckAlive(Action):
             if not item._alive:
                 if group == ENEMY_GROUP or group == SHIP_GROUP:
                     for i in range(PARTICLE_COUNT):
-                        explosions_list = cast.get_actors(EXPLOSION_GROUP)
-                        particle = Particle(explosions_list)
+                        particle = Particle()
                         particle.position = (item._center._x, item._center._y)
                         cast.add_actor(EXPLOSION_GROUP, particle)
 

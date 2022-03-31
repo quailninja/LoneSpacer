@@ -43,7 +43,7 @@ class Particle(arcade.SpriteCircle):
         my_alpha(int): particles opacity
     """
 
-    def __init__(self, my_list):
+    def __init__(self):
         color = random.choice(PARTICLE_COLORS)
         super().__init__(PARTICLE_RADIUS, color)
         self.normal_texture = self.texture
