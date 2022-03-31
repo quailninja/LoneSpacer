@@ -56,3 +56,56 @@ class Particle(arcade.SpriteCircle):
     def advance(self):
         """Not Implemented"""
         pass
+
+
+class ParticleTracker:
+    """A collection of actors.
+
+    The responsibility of a cast is to keep track of a collection of actors. It has methods for
+    adding, removing and getting them by a group name.
+
+    Attributes:
+        _actors (dict): A dictionary of actors { key: group_name, value: a list of actors }
+    """
+
+    def __init__(self):
+        """Constructs a new Actor."""
+        self._particles = {}
+
+    def add_particle(self, group, actor):
+        """Adds an actor to the given group.
+
+        Args:
+            group (string): The name of the group.
+            actor (Actor): The actor to add.
+        """
+        if not group in self._particles.keys():
+            self._particles[group] = arcade.SpriteList()
+
+        if not actor in self._particles[group]:
+            self._particles[group].append(actor)
+
+    def get_particles(self, group):
+        """Gets the actors in the given group.
+
+        Args:
+            group (string): The name of the group.
+
+        Returns:
+            List: The actors in the group.
+        """
+        results = []
+        if group in self._particles.keys():
+            results = self._particles.get(group)
+        return results
+
+    def get_all_particles(self):
+        """Gets all of the actors in the cast.
+
+        Returns:
+            List: All of the actors in the cast.
+        """
+        results = []
+        for group in self._particles:
+            results.append(self._particles.get(group))
+        return results

@@ -13,7 +13,7 @@ class CheckAlive(Action):
     add explosions and smokes if they object is part of a enemy or player group.
     """
 
-    def execute(self, cast):
+    def execute(self, cast, particles):
         """
         Checks actors to see if they're still alive and then removes them, it also starts the explosion.
         """
@@ -28,13 +28,13 @@ class CheckAlive(Action):
 
         self.remove_items(bullet_list, PLAYER_BULLET, cast)
         self.remove_items(enemy_bullets, ENEMY_BULLETS, cast)
-        self.remove_items(enemy_list, ENEMY_GROUP, cast)
-        self.remove_items(player, SHIP_GROUP, cast)
+        self.remove_items(enemy_list, ENEMY_GROUP, cast, particles)
+        self.remove_items(player, SHIP_GROUP, cast, particles)
         self.remove_items(loot, LOOT_GROUP, cast)
         self.remove_items(shield, SHIELD_GROUP, cast)
         self.remove_items(announcements, ANNOUNCEMENT_GROUP, cast)
 
-    def remove_items(self, cast_list, group, cast):
+    def remove_items(self, cast_list, group, cast, particles=None):
         """
         Removes items that are in a group list
         """
@@ -45,11 +45,11 @@ class CheckAlive(Action):
                     for i in range(PARTICLE_COUNT):
                         particle = Particle()
                         particle.position = (item._center._x, item._center._y)
-                        cast.add_actor(EXPLOSION_GROUP, particle)
+                        particles.add_particle(EXPLOSION_GROUP, particle)
 
                     smoke = Smoke(50)
                     smoke.position = (item._center._x, item._center._y)
-                    cast.add_actor(SMOKE_GROUP, smoke)
+                    particles.add_particle(SMOKE_GROUP, smoke)
                     sound.play_sound("explosion")
                 if group == ENEMY_GROUP and item._radius != MISSILE_RADIUS:
                     cast.get_first_actor(SCORE_GROUP).add_points(item.get_points())

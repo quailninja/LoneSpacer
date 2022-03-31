@@ -24,10 +24,10 @@ class KeyboardService(arcade.View):
             player.turn_right()
 
         if arcade.key.UP in keys:
-            player.engine("forward")
+            player.engine(SHIP_FORWARD_THRUST)
 
         if arcade.key.DOWN in keys:
-            player.engine("reverse")
+            player.engine(-SHIP_REVERSE_THRUST)
 
         if arcade.key.Q in keys:
             arcade.close_window()
