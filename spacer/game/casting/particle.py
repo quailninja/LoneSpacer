@@ -59,40 +59,39 @@ class Particle(arcade.SpriteCircle):
 
 
 class ParticleTracker:
-    """A collection of actors.
+    """A collection of Particles.
 
-    The responsibility of a cast is to keep track of a collection of actors. It has methods for
-    adding, removing and getting them by a group name.
+    The responsibility of the particle tracker is to keep track of the particles.
 
     Attributes:
-        _actors (dict): A dictionary of actors { key: group_name, value: a list of actors }
+        _particles (dict): A dictionary of particles { key: group_name, value: a list of particles }
     """
 
     def __init__(self):
-        """Constructs a new Actor."""
+        """Constructs a new particle."""
         self._particles = {}
 
-    def add_particle(self, group, actor):
-        """Adds an actor to the given group.
+    def add_particle(self, group, particle):
+        """Adds an particle to the given group.
 
         Args:
             group (string): The name of the group.
-            actor (Actor): The actor to add.
+            particle (Particle): The particle to add.
         """
         if not group in self._particles.keys():
             self._particles[group] = arcade.SpriteList()
 
-        if not actor in self._particles[group]:
-            self._particles[group].append(actor)
+        if not particle in self._particles[group]:
+            self._particles[group].append(particle)
 
     def get_particles(self, group):
-        """Gets the actors in the given group.
+        """Gets the particle in the given group.
 
         Args:
             group (string): The name of the group.
 
         Returns:
-            List: The actors in the group.
+            List: The particle in the group.
         """
         results = []
         if group in self._particles.keys():
@@ -100,10 +99,10 @@ class ParticleTracker:
         return results
 
     def get_all_particles(self):
-        """Gets all of the actors in the cast.
+        """Gets all of the particle in the cast.
 
         Returns:
-            List: All of the actors in the cast.
+            List: All of the particle in the cast.
         """
         results = []
         for group in self._particles:
