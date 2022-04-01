@@ -41,12 +41,14 @@ class GameScreen(arcade.View):
         _scripts (class): A list of of scripts to run
     """
 
-    def __init__(self, sounds, demo):
+    def __init__(self):
         """
         Sets up the initial conditions of the game
 
         """
         super().__init__()
+
+    def setup(self, sounds, demo):
         self._background_img = arcade.load_texture(BACKGROUND_IMG)
         self._cast = Cast()
         self._cast.add_actor(SHIP_GROUP, Ship())
@@ -78,6 +80,7 @@ class GameScreen(arcade.View):
 
         """
         arcade.set_viewport(0, self.window.width, 0, self.window.height)
+        self.window.set_mouse_visible(False)
 
     def on_draw(self):
         """
@@ -131,8 +134,7 @@ class GameScreen(arcade.View):
         if key == arcade.key.SPACE:
             self._keyboard_services.fire(self._cast)
         elif key == arcade.key.ESCAPE:
-            pause = PauseScreen(self)
-            self.window.show_view(pause)
+            self._keyboard_services.pause(self, self._cast.get_first_actor(SOUND_GROUP))
         elif key == arcade.key.P:
             self._fps.turn_on_off()
         elif key == arcade.key.S:
@@ -154,6 +156,16 @@ class GameScreen(arcade.View):
         """Checks if current game has met game ending conditions"""
         level = self._cast.get_first_actor(LEVEL_GROUP)
         if level.check_win():
-            self.window.show_view(EndView(True, self))
+            self.window.show_view(
+                EndView(
+                    True,
+                    self,
+                )
+            )
         elif level.check_lost():
-            self.window.show_view(EndView(False, self))
+            self.window.show_view(
+                EndView(
+                    False,
+                    self,
+                )
+            )

@@ -17,6 +17,7 @@ def main():
     WIDTH, HEIGHT = window.get_size()
     window.set_viewport(0, WIDTH, 0, HEIGHT)
     start_view = StartScreen()
+    start_view.setup()
     window.show_view(start_view)
     arcade.run()
 

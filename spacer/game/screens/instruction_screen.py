@@ -9,9 +9,12 @@ class InstructionView(arcade.View):
         return_view (class): Previous screen
     """
 
-    def __init__(self, return_view):
+    def __init__(self):
         super().__init__()
-        self.return_view = return_view
+        self.return_view = 0
+
+    def setup(self, view):
+        self.return_view = view
 
     def on_show(self):
         """Updates the background and resets user view
