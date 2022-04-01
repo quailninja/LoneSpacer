@@ -1,7 +1,7 @@
 # CSE_210_Final - Spacer
 Final project for CSE 210
 
-Spacer is a spacer shooter clone.
+Spacer is a space shooter clone.
 
 Click Demo mode for a shorter version of the game. (Made for grading)
 
