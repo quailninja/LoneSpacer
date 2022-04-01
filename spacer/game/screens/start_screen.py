@@ -33,7 +33,6 @@ class StartScreen(arcade.View):
         self.demo = False
         self.demo_label = ""
         self.sounds = Sounds()
-        self.sounds.play_sound("title", True)
         for x in range(DEBRIS_AMOUNT):
             debris = Debris()
             self.debris_list.append(debris)
@@ -70,6 +69,9 @@ class StartScreen(arcade.View):
             )
         )
 
+    def setup(self):
+        self.sounds.play_sound("title", True)
+
     def on_start(self, event: arcade.gui.UIOnClickEvent):
         """Start Button - it starts the game
 
@@ -78,7 +80,8 @@ class StartScreen(arcade.View):
         """
         self.sounds.stop_sound("title")
         self.sounds.play_sound("background", True)
-        game_view = GameScreen(self.sounds, self.demo)
+        game_view = GameScreen()
+        game_view.setup(self.sounds, self.demo)
         self.window.show_view(game_view)
 
     def on_controls(self, event: arcade.gui.UIOnClickEvent):
@@ -87,7 +90,9 @@ class StartScreen(arcade.View):
         Args:
             event (arcade.gui.UIOnClickEvent): tracks mouse
         """
-        self.window.show_view(InstructionView(self))
+        instruction_view = InstructionView()
+        instruction_view.setup(self)
+        self.window.show_view(instruction_view)
 
     def on_quit(self, event: arcade.gui.UIOnClickEvent):
         """Quits the game, in case the didn't want to play
@@ -95,7 +100,7 @@ class StartScreen(arcade.View):
         Args:
             event (arcade.gui.UIOnClickEvent): tracks mouse
         """
-        arcade.exit()
+        arcade.close_window()
 
     def on_demo(self, event: arcade.gui.UIOnClickEvent):
         """Quits the game, in case the didn't want to play

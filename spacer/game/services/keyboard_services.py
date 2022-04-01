@@ -2,6 +2,7 @@ import arcade
 from constants import *
 from game.casting.bullet import Bullet
 from game.casting.shield import Shield
+from game.screens.pause_screen import PauseScreen
 
 
 class KeyboardService(arcade.View):
@@ -69,3 +70,7 @@ class KeyboardService(arcade.View):
                 )
                 ship[0].remove_shield(1)
                 cast.get_first_actor(SOUND_GROUP).play_sound("shield_up")
+
+    def pause(self, game_screen, sound):
+        pause = PauseScreen(game_screen, sound)
+        self.window.show_view(pause)

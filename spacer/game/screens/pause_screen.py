@@ -16,7 +16,7 @@ class PauseScreen(arcade.View):
         v_box (class): Controls layout of pause menu, instance of UIBoxLayout
     """
 
-    def __init__(self, game_view):
+    def __init__(self, game_view, sound):
         """Initiates pause screen
 
         Args:
@@ -27,6 +27,7 @@ class PauseScreen(arcade.View):
         self.manager = arcade.gui.UIManager()
         self.manager.enable()
         self.game_view = game_view
+        self.sounds = sound
         self.v_box = arcade.gui.UIBoxLayout()
 
         title = arcade.gui.UITextArea(
@@ -36,7 +37,6 @@ class PauseScreen(arcade.View):
             font_size=30,
             font_name=TITLE_FONT,
         )
-        # self.game_view._cast.get_first_actor(SOUND_GROUP).pause()
 
         self.v_box.add(title).with_space_around(bottom=20)
 
@@ -73,7 +73,9 @@ class PauseScreen(arcade.View):
         Args:
             event (arcade.gui.UIOnClickEvent): Tracks mouse
         """
-        self.window.show_view(InstructionView(self))
+        instruction_view = InstructionView()
+        instruction_view.setup(self)
+        self.window.show_view(instruction_view)
 
     def on_quit(self, event: arcade.gui.UIOnClickEvent):
         """Quits the game
@@ -86,6 +88,7 @@ class PauseScreen(arcade.View):
     def on_draw(self):
         """Draws everything on the screen"""
         self.clear()
+        self.window.set_mouse_visible(True)
         arcade.draw_lrwh_rectangle_textured(
             0, 0, self.window.width, self.window.height, self._background_img
         )
